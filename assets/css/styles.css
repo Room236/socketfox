@@ -1,0 +1,120 @@
+body {
+    background-color: #343f3e;
+    box-sizing: content-box;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Fira Code", sans-serif;
+    margin: 0;
+    height: 100vh;
+}
+
+.builder {
+    background-color: #3f4c4b;
+    min-width: 256px;
+}
+
+.log {
+    flex: 1;
+    list-style: none;
+    margin: 0 16px;
+    padding: 0;
+}
+
+.log-item {
+    border: 1px solid #4a5958;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.log-item--info {
+    border-left: 8px solid #337ca0;
+}
+
+.log-item--request {
+    border-right: 8px solid #337ca0;
+    margin-left: 96px;
+}
+
+.log-item--response {
+    margin-right: 96px;
+}
+
+.log-item--success {
+    border-left: 8px solid #3ec300;
+}
+
+.log-item--warning {
+    border-left: 8px solid #fffc31;
+}
+
+.log-item__body {
+    padding: 16px;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.nav {
+    background-color: #3f4c4b;
+    display: flex;
+    padding: 8px;
+}
+
+.nav__button {
+    border: none;
+    border-radius: 8px;
+    background-color: #3f4c4b;
+    color: white;
+    cursor: pointer;
+    height: 32px;
+    margin: 0 4px;
+    outline: none;
+    padding: 0;
+    width: 32px;
+}
+
+.nav__button:active {
+    border: 1px solid #b75800;
+}
+
+.nav__button:hover {
+    background-color: #4a5958;
+}
+
+.nav__button--active {
+    color: #3ec300;
+}
+
+.nav__button--error {
+    color: #e3170a;
+}
+
+.nav__button--working {
+    color: #fffc31;
+}
+
+#url {
+    background-color: #343f3e;
+    border: 1px solid #4a5958;
+    border-radius: 8px;
+    color: white;
+    font-family: "Fira Code", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    flex: 1;
+    padding: 8px;
+}
+
+#url:focus {
+    background-color: #4a5958;
+    border: 1px solid #b75800;
+    outline: none;
+}
+
+#url:hover {
+    background-color: #4a5958;
+}

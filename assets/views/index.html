@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Socketfox</title>
+    <link rel="stylesheet" href="../fonts/font-awesome/css/all.css">
+    <link rel="stylesheet" href="../fonts/fira-code/fira_code.css" type="text/css">
+    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav">
+        <input type="text" id="url" placeholder="Enter server address..." />
+        <button id="connect" class="nav__button"><i class="fas fa-plug"></i></button>
+    </div>
+    <main>
+        <div class="builder">
+            stuff goes here
+        </div>
+        <ul class="log">
+            <li class="log-item log-item--response log-item--working">
+                <div class="log-item__body">
+                    stuff in here
+                </div>
+            </li>
+            <li class="log-item log-item--response log-item--success">
+                <div class="log-item__body">
+                    stuff in here
+                </div>
+            </li>
+            <li class="log-item log-item--request">
+                <div class="log-item__body">
+                    stuff in here
+                </div>
+            </li>
+        </ul>
+    </main>
+    <script type="text/javascript">
+        require("../../build/renderer");
+    </script>
+</body>
+</html>

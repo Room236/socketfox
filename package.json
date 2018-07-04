@@ -1,0 +1,22 @@
+{
+    "name": "socketfox",
+    "version": "1.0.0",
+    "license": "UNLICENSED",
+    "main": "build/main.js",
+    "scripts": {
+        "build": "yarn run-script build",
+        "run-script": "chmod +x scripts/run-script.sh && scripts/run-script.sh",
+        "start": "electron build"
+    },
+    "devDependencies": {
+        "@types/jquery": "^3.3.4",
+        "@types/socket.io-client": "^1.4.32",
+        "electron": "^2.0.0",
+        "tslint": "^5.10.0",
+        "typescript": "^2.9.2"
+    },
+    "dependencies": {
+        "jquery": "^3.3.1",
+        "socket.io-client": "^2.1.1"
+    }
+}
