@@ -11,7 +11,7 @@ export namespace Log {
             .addClass(`log-item--${isRequest ? "request" : "response"}`);
         const $body = $("<div></div>")
             .addClass("log-item__body")
-            .text(message);
+            .html(message);
         $item.append($body);
 
         // remove empty message if needed
@@ -24,24 +24,33 @@ export namespace Log {
         $(".log").prepend($item);
     }
 
-    export function error(message: string) {
-        prependMessage("error", message, false);
+    export function escape(message: string) {
+        return $("<span></span>").text(message).html();
     }
 
-    export function info(message: string) {
-        prependMessage("info", message, false);
+    export function error(message: string, html: boolean = false) {
+        const content = html ? message : escape(message);
+        prependMessage("error", content, false);
     }
 
-    export function request(message: string) {
-        prependMessage("request", message, true);
+    export function info(message: string, html: boolean = false) {
+        const content = html ? message : escape(message);
+        prependMessage("info", content, false);
     }
 
-    export function success(message: string) {
-        prependMessage("success", message, false);
+    export function request(message: string, html: boolean = false) {
+        const content = html ? message : escape(message);
+        prependMessage("request", content, true);
     }
 
-    export function warn(message: string) {
-        prependMessage("warning", message, false);
+    export function success(message: string, html: boolean = false) {
+        const content = html ? message : escape(message);
+        prependMessage("success", content, false);
+    }
+
+    export function warn(message: string, html: boolean = false) {
+        const content = html ? message : escape(message);
+        prependMessage("warning", content, false);
     }
 
 }

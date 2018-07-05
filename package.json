@@ -11,7 +11,6 @@
     "devDependencies": {
         "@types/jquery": "^3.3.4",
         "@types/socket.io-client": "^1.4.32",
-        "@types/socketio-wildcard": "^2.0.1",
         "electron": "^2.0.0",
         "tslint": "^5.10.0",
         "typescript": "^2.9.2"

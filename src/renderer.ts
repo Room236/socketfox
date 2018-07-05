@@ -2,6 +2,7 @@ import * as $ from "jquery";
 import * as SocketIOClient from "socket.io-client";
 import * as SocketIOWildcard from "socketio-wildcard";
 import {Log} from "./log";
+import {PrettyPrint} from "./prettyprint";
 
 // create socket.io client
 let active: boolean = false; // whether the connection is "active" (connecting, connected, error, etc.)
@@ -54,9 +55,17 @@ function connect(url: string) {
 
     // handle all events
     socket.on("*", (pkg) => {
-        let output: string = `Received event: ${pkg.data[0]}`;
-        output += `\n${pkg.data[1]}`;
-        Log.info(output);
+        let output: string = `Received event: ${Log.escape(pkg.data[0])}<br/>`;
+
+        // format the event data
+        if (pkg.data[1]) {
+            const formattedData: string = PrettyPrint.format(pkg.data[1]);
+            output += Log.escape(formattedData)
+                .replace(new RegExp("\n", "g"), "<br/>")
+                .replace(new RegExp(" ", "g"), "&nbsp;");
+        }
+
+        Log.info(output, true);
     });
 
     // handle connection established
