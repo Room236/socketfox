@@ -2,36 +2,46 @@ import * as $ from "jquery";
 
 export namespace Log {
 
-    function appendMessage(category: string, message: string) {
+    function prependMessage(category: string, message: string, isRequest: boolean) {
+
+        // build new log item
         const $item = $("<li></li>")
             .addClass("log-item")
-            .addClass(`log-item--${category}`);
+            .addClass(`log-item--${category}`)
+            .addClass(`log-item--${isRequest ? "request" : "response"}`);
         const $body = $("<div></div>")
             .addClass("log-item__body")
             .text(message);
-
         $item.append($body);
-        $(".log").append($item);
+
+        // remove empty message if needed
+        const $emptyMessage = $(".log__empty-message");
+        if ($emptyMessage.length > 0) {
+            $emptyMessage.hide();
+        }
+
+        // add log item to log
+        $(".log").prepend($item);
     }
 
     export function error(message: string) {
-        appendMessage("error", message);
+        prependMessage("error", message, false);
     }
 
     export function info(message: string) {
-        appendMessage("info", message);
+        prependMessage("info", message, false);
     }
 
     export function request(message: string) {
-        appendMessage("request", message);
+        prependMessage("request", message, true);
     }
 
     export function success(message: string) {
-        appendMessage("success", message);
+        prependMessage("success", message, false);
     }
 
     export function warn(message: string) {
-        appendMessage("warning", message);
+        prependMessage("warning", message, false);
     }
 
 }

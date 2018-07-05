@@ -9,29 +9,15 @@
 </head>
 <body>
     <div class="nav">
-        <input type="text" id="url" placeholder="Enter server address..." />
+        <input type="text" id="url" class="text-box" placeholder="Enter server address..." />
         <button id="connect" class="nav__button"><i class="fas fa-plug"></i></button>
     </div>
     <main>
         <div class="builder">
-            stuff goes here
+            <input type="text" id="new-event-name" class="text-box" placeholder="Event name" />
         </div>
         <ul class="log">
-            <li class="log-item log-item--response log-item--working">
-                <div class="log-item__body">
-                    stuff in here
-                </div>
-            </li>
-            <li class="log-item log-item--response log-item--success">
-                <div class="log-item__body">
-                    stuff in here
-                </div>
-            </li>
-            <li class="log-item log-item--request">
-                <div class="log-item__body">
-                    stuff in here
-                </div>
-            </li>
+            <li class="log__empty-message">No events</li>
         </ul>
     </main>
     <script type="text/javascript">

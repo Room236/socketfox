@@ -6,13 +6,30 @@
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.4.tgz#f1850fb9a70041a14ace4f81a7ed782db8548317"
 
+"@types/node@*":
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
+
 "@types/node@^8.0.24":
   version "8.10.20"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.20.tgz#fe674ea52e13950ab10954433a7824438aabbcac"
 
-"@types/socket.io-client@^1.4.32":
+"@types/socket.io-client@*", "@types/socket.io-client@^1.4.32":
   version "1.4.32"
   resolved "https://registry.yarnpkg.com/@types/socket.io-client/-/socket.io-client-1.4.32.tgz#988a65a0386c274b1c22a55377fab6a30789ac14"
+
+"@types/socket.io@*":
+  version "1.4.36"
+  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-1.4.36.tgz#9d7d175d602110a72223c7938932d8d947c429fa"
+  dependencies:
+    "@types/node" "*"
+
+"@types/socketio-wildcard@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/socketio-wildcard/-/socketio-wildcard-2.0.1.tgz#008ae4fdffc3335a179f233f5bb6448770e9cfda"
+  dependencies:
+    "@types/socket.io" "*"
+    "@types/socket.io-client" "*"
 
 after@0.8.2:
   version "0.8.2"
@@ -951,6 +968,10 @@ socket.io-parser@~3.2.0:
     component-emitter "1.2.1"
     debug "~3.1.0"
     isarray "2.0.1"
+
+socketio-wildcard@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/socketio-wildcard/-/socketio-wildcard-2.0.0.tgz#2466e832276b19163563bee772388747f912475b"
 
 spdx-correct@^3.0.0:
   version "3.0.0"
