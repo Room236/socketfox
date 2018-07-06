@@ -4,6 +4,12 @@ import * as SocketIOWildcard from "socketio-wildcard";
 import {Log} from "./log";
 import {PrettyPrint} from "./prettyprint";
 
+// load ace editor
+const editor = ace.edit("editor");
+editor.setTheme("ace/theme/tomorrow_night_eighties");
+editor.session.setMode("ace/mode/json");
+editor.renderer.setShowGutter(false);
+
 // create socket.io client
 let active: boolean = false; // whether the connection is "active" (connecting, connected, error, etc.)
 let host: string = null; // the current hostname of the attempted connection
@@ -12,18 +18,18 @@ let socket: SocketIOClient.Socket = null; // the socket connection
 function setConnectionStatus(status: string) {
     const $connect = $("#connect");
     $connect
-        .removeClass("nav__button--error")
-        .removeClass("nav__button--warning")
-        .removeClass("nav__button--active");
+        .removeClass("button--error")
+        .removeClass("button--warning")
+        .removeClass("button--active");
     switch (status) {
         case "success":
-            $connect.addClass("nav__button--active");
+            $connect.addClass("button--active");
             break;
         case "working":
-            $connect.addClass("nav__button--warning");
+            $connect.addClass("button--warning");
             break;
         case "error":
-            $connect.addClass("nav__button--error");
+            $connect.addClass("button--error");
             break;
     }
 }
@@ -55,7 +61,7 @@ function connect(url: string) {
 
     // handle all events
     socket.on("*", (pkg) => {
-        let output: string = `Received event: ${Log.escape(pkg.data[0])}<br/>`;
+        let output: string = `Received event: ${Log.escape(pkg.data[0])}<br/>Data: `;
 
         // format the event data
         if (pkg.data[1]) {
@@ -124,6 +130,36 @@ function disconnect() {
     Log.info(`Disconnected from ${host}`);
 }
 
+function send(name: string, type: string, data: string) {
+    let finalData: object|string|number|boolean = null;
+    if (data !== "") {
+        switch (type) {
+            case "object":
+                finalData = JSON.parse(data);
+                break;
+            case "string":
+                finalData = data;
+                break;
+            case "integer":
+                finalData = parseInt(data, 10);
+                break;
+            case "float":
+                finalData = parseFloat(data);
+                break;
+            case "boolean":
+                finalData = data === "true";
+                break;
+        }
+    }
+    socket.emit(name, finalData);
+
+    // format data for display
+    const displayData: string = Log.escape(PrettyPrint.format(finalData))
+        .replace(new RegExp("\n", "g"), "<br/>")
+        .replace(new RegExp(" ", "g"), "&nbsp;");
+    Log.request(`Sent event: ${name}<br/>Data: ${displayData}`, true);
+}
+
 // connect to server on enter key in url
 $("#url").on("keyup", (e: JQuery.Event) => {
     if (e.which === 13) { // enter key was pressed
@@ -140,4 +176,27 @@ $("#connect").on("click", () => {
     } else { // socket is connected, disconnect
         disconnect();
     }
+});
+
+// change editor modes when the data type changes
+const $newEventType = $("#new-event-type");
+$newEventType.on("change", () => {
+    switch ($newEventType.val()) {
+        case "object":
+            editor.session.setMode("ace/mode/json");
+            break;
+        default:
+            editor.session.setMode("ace/mode/plain_text");
+    }
+});
+
+// handle send button
+$("#send__button").on("click", () => {
+    const name: string = <string>($("#new-event-name").val());
+    const type: string = <string>($("#new-event-type").val());
+    const data: string = editor.getValue();
+    if (name === "" || !active) {
+        return;
+    }
+    send(name, type, data);
 });

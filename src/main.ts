@@ -1,4 +1,5 @@
 import {app, BrowserWindow} from "electron";
+import * as Path from "path";
 
 let mainWindow; // keep a global reference to the window to keep it from being gc'd
 
@@ -8,6 +9,7 @@ let mainWindow; // keep a global reference to the window to keep it from being g
 function createWindow() {
     mainWindow = new BrowserWindow({
         "height": 600,
+        "icon": Path.join(__dirname, "assets/icons/png/64x64.png"),
         "width": 800
     });
 

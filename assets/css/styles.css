@@ -15,6 +15,49 @@ body {
     width: 256px;
 }
 
+.button {
+    border: none;
+    border-radius: 8px;
+    background-color: #3f4c4b;
+    color: white;
+    cursor: pointer;
+    height: 32px;
+    margin: 0 4px;
+    outline: none;
+    padding: 0;
+    width: 32px;
+}
+
+.button:active {
+    border: 1px solid #b75800;
+}
+
+.button:hover {
+    background-color: #4a5958;
+}
+
+.button--active {
+    color: #3ec300;
+}
+
+.button--error {
+    color: #e3170a;
+}
+
+.button--warning {
+    color: #fffc31;
+}
+
+#editor {
+    height: 300px;
+    margin-bottom: 8px;
+}
+
+#send {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .log {
     flex: 1;
     height: 100%;
@@ -80,37 +123,48 @@ main {
     padding: 8px;
 }
 
-.nav__button {
-    border: none;
-    border-radius: 8px;
-    background-color: #3f4c4b;
-    color: white;
-    cursor: pointer;
-    height: 32px;
-    margin: 0 4px;
-    outline: none;
-    padding: 0;
-    width: 32px;
+.panel__title {
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 0;
 }
 
-.nav__button:active {
+.select-box {
+    position: relative;
+}
+
+.select-box__element {
+    -webkit-appearance: none;
+    background-color: #343f3e;
+    border: 1px solid #4a5958;
+    border-radius: 8px;
+    color: #757575;
+    font-family: "Fira Code", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.select-box__element:focus {
+    background-color: #4a5958;
     border: 1px solid #b75800;
 }
 
-.nav__button:hover {
+.select-box__element:hover {
     background-color: #4a5958;
 }
 
-.nav__button--active {
-    color: #3ec300;
-}
-
-.nav__button--error {
-    color: #e3170a;
-}
-
-.nav__button--warning {
-    color: #fffc31;
+.select-box__indicator {
+    color: #757575;
+    display: block;
+    font-size: 12px;
+    line-height: 32px;
+    position: absolute;
+    right: 12px;
+    top: 0;
 }
 
 .text-box {
@@ -122,6 +176,8 @@ main {
     font-family: "Fira Code", sans-serif;
     font-size: 12px;
     font-weight: 300;
+    margin-bottom: 8px;
+    outline: none;
     padding: 8px;
     width: 100%;
 }
@@ -129,7 +185,6 @@ main {
 .text-box:focus {
     background-color: #4a5958;
     border: 1px solid #b75800;
-    outline: none;
 }
 
 .text-box:hover {
