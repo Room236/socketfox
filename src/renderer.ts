@@ -1,3 +1,4 @@
+import {remote} from "electron";
 import * as $ from "jquery";
 import * as SocketIOClient from "socket.io-client";
 import * as SocketIOWildcard from "socketio-wildcard";
@@ -133,22 +134,27 @@ function disconnect() {
 function send(name: string, type: string, data: string) {
     let finalData: object|string|number|boolean = null;
     if (data !== "") {
-        switch (type) {
-            case "object":
-                finalData = JSON.parse(data);
-                break;
-            case "string":
-                finalData = data;
-                break;
-            case "integer":
-                finalData = parseInt(data, 10);
-                break;
-            case "float":
-                finalData = parseFloat(data);
-                break;
-            case "boolean":
-                finalData = data === "true";
-                break;
+        try {
+            switch (type) {
+                case "object":
+                    finalData = JSON.parse(data);
+                    break;
+                case "string":
+                    finalData = data;
+                    break;
+                case "integer":
+                    finalData = parseInt(data, 10);
+                    break;
+                case "float":
+                    finalData = parseFloat(data);
+                    break;
+                case "boolean":
+                    finalData = data === "true";
+                    break;
+            }
+        } catch (ex) {
+            remote.dialog.showErrorBox("Invalid data", `Event data is not of the type ${type}.`);
+            return;
         }
     }
     socket.emit(name, finalData);
@@ -199,4 +205,26 @@ $("#send__button").on("click", () => {
         return;
     }
     send(name, type, data);
+});
+
+// handle keyboard shortcut for sending requests
+$(document).on("keydown", (e: JQuery.Event) => {
+
+    // only continue if correct keyboard shortcut is performed
+    const isModifierKeyPressed: boolean = process.platform === "darwin" ? e.metaKey : e.ctrlKey; // command key on macos
+    if (!isModifierKeyPressed || e.which !== 13) {
+        return;
+    }
+
+    // extract data from ui
+    const name: string = <string>($("#new-event-name").val());
+    const type: string = <string>($("#new-event-type").val());
+    const data: string = editor.getValue();
+    if (name === "" || !active) { // name is not specified or not connected to a server, don't do anything
+        return;
+    }
+
+    // fire the event
+    send(name, type, data);
+
 });

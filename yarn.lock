@@ -6,6 +6,10 @@
   version "0.0.40"
   resolved "https://registry.yarnpkg.com/@types/ace/-/ace-0.0.40.tgz#f6ef88e006950a2207776f89196b242177e51d35"
 
+"@types/electron-is-dev@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@types/electron-is-dev/-/electron-is-dev-0.3.0.tgz#28dc6aa4c9493869a8c5da29ebd586648f5ffb70"
+
 "@types/jquery@^3.3.4":
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.4.tgz#f1850fb9a70041a14ace4f81a7ed782db8548317"
@@ -352,6 +356,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
+electron-about-window@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/electron-about-window/-/electron-about-window-1.12.1.tgz#c642de39b32b254b8fbba6181a2a29c2b5da24b9"
+
 electron-download@^3.0.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/electron-download/-/electron-download-3.3.0.tgz#2cfd54d6966c019c4d49ad65fbe65cc9cdef68c8"
@@ -379,6 +387,10 @@ electron-download@^4.0.0:
     rc "^1.1.2"
     semver "^5.3.0"
     sumchecker "^2.0.1"
+
+electron-is-dev@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
 
 electron-osx-sign@^0.4.1:
   version "0.4.10"
