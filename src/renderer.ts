@@ -134,32 +134,18 @@ function disconnect() {
     Log.info(`Disconnected from ${host}`);
 }
 
-function send(name: string, type: string, data: string) {
+function send(name: string, data: string) {
+
+    // try to parse the data
     let finalData: object|string|number|boolean = null;
-    if (data !== "") {
-        try {
-            switch (type) {
-                case "object":
-                    finalData = JSON.parse(data);
-                    break;
-                case "string":
-                    finalData = data;
-                    break;
-                case "integer":
-                    finalData = parseInt(data, 10);
-                    break;
-                case "float":
-                    finalData = parseFloat(data);
-                    break;
-                case "boolean":
-                    finalData = data === "true";
-                    break;
-            }
-        } catch (ex) {
-            remote.dialog.showErrorBox("Invalid data", `Event data is not of the type ${type}.`);
-            return;
-        }
+    try {
+        finalData = JSON.parse(data);
+    } catch (ex) {
+        remote.dialog.showErrorBox("Invalid data", `Event data is not of a valid type.`);
+        return;
     }
+
+    // emit the event over the socket
     socket.emit(name, finalData);
 
     // format data for display
@@ -202,12 +188,11 @@ $newEventType.on("change", () => {
 // handle send button
 $("#send__button").on("click", () => {
     const name: string = <string>($("#new-event-name").val());
-    const type: string = <string>($("#new-event-type").val());
     const data: string = editor.getValue();
     if (name === "" || !active) {
         return;
     }
-    send(name, type, data);
+    send(name, data);
 });
 
 // handle keyboard shortcut for sending requests
@@ -221,13 +206,12 @@ $(document).on("keydown", (e: JQuery.Event) => {
 
     // extract data from ui
     const name: string = <string>($("#new-event-name").val());
-    const type: string = <string>($("#new-event-type").val());
     const data: string = editor.getValue();
     if (name === "" || !active) { // name is not specified or not connected to a server, don't do anything
         return;
     }
 
     // fire the event
-    send(name, type, data);
+    send(name, data);
 
 });

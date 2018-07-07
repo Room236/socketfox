@@ -1,38 +1,26 @@
-import {app, BrowserWindow, Menu, MenuItemConstructorOptions, shell} from "electron";
+import {app, Menu, MenuItemConstructorOptions} from "electron";
 import openAboutWindow from "electron-about-window";
 import * as isDev from "electron-is-dev";
-import * as Path from "path";
-
-let mainWindow; // keep a global reference to the window to keep it from being gc'd
+import {InstanceWindow} from "./instanceWindow";
 
 /**
  * Creates a new window
  */
 function createWindow() {
-    mainWindow = new BrowserWindow({
-        "height": 600,
-        "icon": Path.join(__dirname, "assets/icons/png/64x64.png"),
-        "width": 800
-    });
-
-    // load the main view
-    mainWindow.loadFile("assets/views/index.html");
-
-    // handle window closed
-    mainWindow.on("closed", () => {
-        mainWindow = null;
-    });
+    const window: InstanceWindow = new InstanceWindow();
+    window.load();
 }
 
 /**
  * Initializes the app on startup
  */
 function init() {
+    const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
 
     // create the application menus
     const menuTemplate: MenuItemConstructorOptions[] = [
         {
-            "label": process.platform === "darwin" ? app.getName() : "Help",
+            "label": isDarwin ? app.getName() : "Help",
             "submenu": [
                 {
                     "click": () => {
@@ -48,22 +36,60 @@ function init() {
                         });
                     },
                     "label": "About Socketfox"
+                }
+            ]
+        },
+        {
+            "label": "File",
+            "submenu": [
+                {
+                    "accelerator": "CommandOrControl+N",
+                    "click": () => {
+                        createWindow();
+                    },
+                    "label": "New Window"
                 },
-                { "role": "separator" },
-                { "role": "quit" }
+                {
+                    "accelerator": "CommandOrControl+W",
+                    "click": () => {
+                        if (InstanceWindow.windows.length > 0) {
+                            InstanceWindow.windows[0].window.close();
+                        }
+                    },
+                    "label": "Close Window"
+                }
+            ]
+        },
+        {
+            "label": "Edit",
+            "submenu": [
+                { "role": "undo" },
+                { "role": "redo" },
+                { "type": "separator" },
+                { "role": "cut" },
+                { "role": "copy" },
+                { "role": "paste" },
+                { "role": "delete" },
+                { "role": "selectAll" }
             ]
         }
     ];
-    if (isDev) { // add dev settings if running in dev mode
+
+    // move help menu to end of menu bar if on windows/linux
+    if (!isDarwin) {
+        const helpMenu: MenuItemConstructorOptions = menuTemplate.splice(0, 1)[0];
+        menuTemplate.push(helpMenu);
+    }
+
+    // add quit options to first menu
+    (menuTemplate[0]["submenu"] as MenuItemConstructorOptions[]).push({ "type": "separator" });
+    (menuTemplate[0]["submenu"] as MenuItemConstructorOptions[]).push({ "role": "quit" });
+
+    // add dev settings to menu if running in dev mode
+    if (isDev) {
         menuTemplate.push({
-            "label": "Danger Zone",
+            "label": "Developer",
             "submenu": [
-                {
-                    "click": () => {
-                        shell.openExternal("https://www.youtube.com/watch?v=siwpn14IE7E");
-                    },
-                    "label": "Play Appropriate Music"
-                },
                 { "role": "reload" },
                 { "role": "toggledevtools" }
             ]
@@ -88,8 +114,9 @@ app.on("window-all-closed", function () {
     }
 });
 
+// app is reactivated on macos after it was deactivated (but not closed) - make a new window
 app.on("activate", function () {
-    if (mainWindow === null) { // macOS keeps apps running and allows re-creating windows
+    if (InstanceWindow.windows.length === 0) {
         createWindow();
     }
 });
