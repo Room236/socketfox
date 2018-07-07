@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "license": "GPL-3.0-only",
     "main": "build/main.js",
     "scripts": {
@@ -10,7 +10,7 @@
         "bundle:macos": "yarn run-script bundle-macos",
         "bundle:windows": "yarn run-script bundle-win",
         "run-script": "chmod +x scripts/run-script.sh && scripts/run-script.sh",
-        "start": "electron build"
+        "start": "electron ."
     },
     "devDependencies": {
         "@types/ace": "^0.0.40",
@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "ace-builds": "^1.3.3",
+        "debug": "^3.1.0",
         "electron-about-window": "^1.12.1",
         "electron-is-dev": "^0.3.0",
         "jquery": "^3.3.1",

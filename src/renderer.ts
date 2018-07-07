@@ -53,7 +53,10 @@ function connect(url: string) {
     Log.info(`Connecting to ${url}`);
 
     // connect to server
-    socket = SocketIOClient.connect(url);
+    socket = SocketIOClient.connect(url, {
+        "transports": [ "websocket" ],
+        "upgrade": false
+    });
     host = url;
 
     // patch socket.io client to handle wildcards
