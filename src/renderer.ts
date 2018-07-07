@@ -138,11 +138,13 @@ function send(name: string, data: string) {
 
     // try to parse the data
     let finalData: object|string|number|boolean = null;
-    try {
-        finalData = JSON.parse(data);
-    } catch (ex) {
-        remote.dialog.showErrorBox("Invalid data", `Event data is not of a valid type.`);
-        return;
+    if (data) {
+        try {
+            finalData = JSON.parse(data);
+        } catch (ex) {
+            remote.dialog.showErrorBox("Invalid data", `Event data is not of a valid type.`);
+            return;
+        }
     }
 
     // emit the event over the socket
