@@ -24,6 +24,11 @@ export namespace Log {
         $(".log").prepend($item);
     }
 
+    export function clear() {
+        $(".log").find(":not(.log__empty-message)").remove();
+        $(".log__empty-message").show();
+    }
+
     export function escape(message: string) {
         return $("<span></span>").text(message).html();
     }

@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "license": "GPL-3.0-only",
     "main": "build/main.js",
     "scripts": {

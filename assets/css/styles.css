@@ -21,6 +21,7 @@ body {
     background-color: #3f4c4b;
     color: white;
     cursor: pointer;
+    flex-shrink: 0;
     height: 32px;
     margin: 0 4px;
     outline: none;
@@ -80,6 +81,7 @@ body {
     border-radius: 8px;
     font-size: 12px;
     margin: 16px 0;
+    word-wrap: break-word;
 }
 
 .log-item--error {

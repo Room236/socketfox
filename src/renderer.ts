@@ -217,3 +217,8 @@ $(document).on("keydown", (e: JQuery.Event) => {
     send(name, data);
 
 });
+
+// handle clear history button
+$("#clear__button").on("click", () => {
+    Log.clear();
+});
