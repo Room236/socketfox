@@ -2,7 +2,7 @@
 
 source "include.sh"
 
-yarn electron-packager "DIR" socketfox --overwrite \
+yarn electron-packager "$DIR" socketfox --overwrite \
                                        --asar=true \
                                        --platform=win32 \
                                        --arch=ia32 \
