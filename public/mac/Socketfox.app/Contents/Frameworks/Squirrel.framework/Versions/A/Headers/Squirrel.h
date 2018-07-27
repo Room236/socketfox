@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fe53b21fe7421736479864a822b7d3b446c293c83285c4baf7c6b92bffe83c96
-size 587
+//
+//  Squirrel.h
+//  Squirrel
+//
+//  Created by Justin Spahr-Summers on 2013-07-21.
+//  Copyright (c) 2013 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+//! Project version number for Squirrel.
+FOUNDATION_EXPORT double SquirrelVersionNumber;
+
+//! Project version string for Squirrel.
+FOUNDATION_EXPORT const unsigned char SquirrelVersionString[];
+
+#import <Squirrel/NSBundle+SQRLVersionExtensions.h>
+#import <Squirrel/NSProcessInfo+SQRLVersionExtensions.h>
+#import <Squirrel/SQRLDownloadedUpdate.h>
+#import <Squirrel/SQRLUpdater.h>
+#import <Squirrel/SQRLUpdate.h>

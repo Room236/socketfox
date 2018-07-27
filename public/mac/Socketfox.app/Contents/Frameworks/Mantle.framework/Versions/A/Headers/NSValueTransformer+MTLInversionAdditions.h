@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb1a64ac2c3a67607710e14a18c062ea8efc1dabb4bf4cec7c625e40c024df9e
-size 553
+//
+//  NSValueTransformer+MTLInversionAdditions.h
+//  Mantle
+//
+//  Created by Justin Spahr-Summers on 2013-05-18.
+//  Copyright (c) 2013 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NSValueTransformer (MTLInversionAdditions)
+
+// Flips the direction of the receiver's transformation, such that
+// -transformedValue: will become -reverseTransformedValue:, and vice-versa.
+//
+// The receiver must allow reverse transformation.
+//
+// Returns an inverted transformer.
+- (NSValueTransformer *)mtl_invertedTransformer;
+
+@end

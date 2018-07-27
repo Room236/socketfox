@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f3accbee35fde92a5aef14f91d027e6989ad5c3d6828b52b53826d94ed9c22a5
-size 406
+//
+//  NSObject+MTLComparisonAdditions.h
+//  Mantle
+//
+//  Created by Josh Vera on 10/26/12.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+//  Portions copyright (c) 2011 Bitswift. All rights reserved.
+//  See the LICENSE file for more information.
+//
+
+#import <Foundation/Foundation.h>
+
+// Returns whether both objects are identical or equal via -isEqual:
+BOOL MTLEqualObjects(id obj1, id obj2);

@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:645e54fa7af431b690799028a9c36c215e82d2996e9b00e11c3a9b9822749579
-size 390
+//
+//  RACUnit.h
+//  ReactiveCocoa
+//
+//  Created by Josh Abernathy on 3/27/12.
+//  Copyright (c) 2012 GitHub, Inc. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+/// A unit represents an empty value.
+///
+/// It should never be necessary to create a unit yourself. Just use +defaultUnit.
+@interface RACUnit : NSObject
+
+/// A singleton instance.
++ (RACUnit *)defaultUnit;
+
+@end

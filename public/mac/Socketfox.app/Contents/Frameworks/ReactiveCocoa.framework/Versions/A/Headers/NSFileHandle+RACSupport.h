@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3a76749e9e768ed81f8db31551b674d43834372c67b1571c3fae078aa071efd3
-size 384
+//
+//  NSFileHandle+RACSupport.h
+//  ReactiveCocoa
+//
+//  Created by Josh Abernathy on 5/10/12.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSignal;
+
+@interface NSFileHandle (RACSupport)
+
+// Read any available data in the background and send it. Completes when data
+// length is <= 0.
+- (RACSignal *)rac_readInBackground;
+
+@end

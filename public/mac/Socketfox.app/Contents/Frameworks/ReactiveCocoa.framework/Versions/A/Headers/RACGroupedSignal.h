@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1a7dc6404d2a549ef82f7390d72c0eb4e23a261f65940abba2608527688469ae
-size 427
+//
+//  RACGroupedSignal.h
+//  ReactiveCocoa
+//
+//  Created by Josh Abernathy on 5/2/12.
+//  Copyright (c) 2012 GitHub, Inc. All rights reserved.
+//
+
+#import "RACSubject.h"
+
+/// A grouped signal is used by -[RACSignal groupBy:transform:].
+@interface RACGroupedSignal : RACSubject
+
+/// The key shared by the group.
+@property (nonatomic, readonly, copy) id<NSCopying> key;
+
++ (instancetype)signalWithKey:(id<NSCopying>)key;
+
+@end

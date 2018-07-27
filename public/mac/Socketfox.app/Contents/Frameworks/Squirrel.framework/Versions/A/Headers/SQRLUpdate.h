@@ -1,3 +1,31 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:accf75ad3c6512ab9bf4870a997416828a95a8033b2b2978e8a3c257c4499c7e
-size 972
+//
+//  SQRLUpdate.h
+//  Squirrel
+//
+//  Created by Keith Duncan on 18/09/2013.
+//  Copyright (c) 2013 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
+
+// An update parsed from a response to the `SQRLUpdater.updateRequest`.
+//
+// This can be subclassed, and `SQRLUpdater.updateClass` set, to preserve
+// additional JSON data. Any subclasses must be immutable, and should inherit
+// their superclass' property key and transformer behaviors.
+@interface SQRLUpdate : MTLModel <MTLJSONSerializing>
+
+// The release notes for the update.
+@property (readonly, copy, nonatomic) NSString *releaseNotes;
+
+// The release name for the update.
+@property (readonly, copy, nonatomic) NSString *releaseName;
+
+// The release date for the update.
+@property (readonly, copy, nonatomic) NSDate *releaseDate;
+
+// The URL to the update package that should be downloaded for installation.
+@property (readonly, copy, nonatomic) NSURL *updateURL;
+
+@end

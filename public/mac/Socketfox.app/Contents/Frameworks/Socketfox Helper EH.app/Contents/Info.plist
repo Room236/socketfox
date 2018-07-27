@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:482bc07a7bf4e1f9bdd57feca159a2dd0ed58d6d489fe300571e26651a9ef7d4
-size 1014
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>BuildMachineOSBuild</key>
+    <string>16G1510</string>
+    <key>CFBundleDisplayName</key>
+    <string>Socketfox Helper EH</string>
+    <key>CFBundleExecutable</key>
+    <string>Socketfox Helper EH</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.richardkriesman.socketfox.helper.EH</string>
+    <key>CFBundleName</key>
+    <string>Electron Helper EH</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTSDKBuild</key>
+    <string>14D125</string>
+    <key>DTSDKName</key>
+    <string>macosx10.1010.10</string>
+    <key>DTXcode</key>
+    <string>0833</string>
+    <key>DTXcodeBuild</key>
+    <string>8E3004b</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+    <key>CFBundleVersion</key>
+    <string>0.3.0</string>
+  </dict>
+</plist>

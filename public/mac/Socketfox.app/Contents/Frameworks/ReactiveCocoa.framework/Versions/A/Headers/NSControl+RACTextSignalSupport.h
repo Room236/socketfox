@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1956260605bf2b84c2c435a69b6c2b88f2142a4976e4fbb383818acbdc9836b3
-size 568
+//
+//  NSControl+RACTextSignalSupport.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2013-03-08.
+//  Copyright (c) 2013 GitHub, Inc. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+@class RACSignal;
+
+@interface NSControl (RACTextSignalSupport)
+
+/// Observes a text-based control for changes.
+///
+/// Using this method on a control without editable text is considered undefined
+/// behavior.
+///
+/// Returns a signal which sends the current string value of the receiver, then
+/// the new value any time it changes.
+- (RACSignal *)rac_textSignal;
+
+@end

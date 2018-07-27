@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7bc5b18bc02b5a04240cd5b5216a77197e51db1e21d447b431c56070c441e17a
-size 486
+//
+//  NSArray+RACSequenceAdditions.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2012-10-29.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSequence;
+
+@interface NSArray (RACSequenceAdditions)
+
+/// Creates and returns a sequence corresponding to the receiver.
+///
+/// Mutating the receiver will not affect the sequence after it's been created.
+@property (nonatomic, copy, readonly) RACSequence *rac_sequence;
+
+@end

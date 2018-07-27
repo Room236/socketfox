@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:05a2c155d67edb7e2794639bfbe2a435010adb2200ac3a698098645c79c1a9d4
-size 400
+//
+//  NSText+RACSignalSupport.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2013-03-08.
+//  Copyright (c) 2013 GitHub, Inc. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+@class RACSignal;
+
+@interface NSText (RACSignalSupport)
+
+/// Returns a signal which sends the current `string` of the receiver, then the
+/// new value any time it changes.
+- (RACSignal *)rac_textSignal;
+
+@end

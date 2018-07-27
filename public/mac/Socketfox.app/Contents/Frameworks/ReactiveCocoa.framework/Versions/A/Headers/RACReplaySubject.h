@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:dc0547c4a5d27ec1aa73c8659e3fd3a743d0f227274e98cd657ebb9b1f82baa3
-size 656
+//
+//  RACReplaySubject.h
+//  ReactiveCocoa
+//
+//  Created by Josh Abernathy on 3/14/12.
+//  Copyright (c) 2012 GitHub, Inc. All rights reserved.
+//
+
+#import "RACSubject.h"
+
+extern const NSUInteger RACReplaySubjectUnlimitedCapacity;
+
+/// A replay subject saves the values it is sent (up to its defined capacity)
+/// and resends those to new subscribers. It will also replay an error or
+/// completion.
+@interface RACReplaySubject : RACSubject
+
+/// Creates a new replay subject with the given capacity. A capacity of
+/// RACReplaySubjectUnlimitedCapacity means values are never trimmed.
++ (instancetype)replaySubjectWithCapacity:(NSUInteger)capacity;
+
+@end

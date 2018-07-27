@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0dfc5dc8bfa1add0f4c25b358b3f666349f2b23793e93b71840c667f453e0d03
-size 496
+//
+//  NSOrderedSet+RACSequenceAdditions.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2012-10-29.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSequence;
+
+@interface NSOrderedSet (RACSequenceAdditions)
+
+/// Creates and returns a sequence corresponding to the receiver.
+///
+/// Mutating the receiver will not affect the sequence after it's been created.
+@property (nonatomic, copy, readonly) RACSequence *rac_sequence;
+
+@end

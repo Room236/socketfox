@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1f22ec7518586b5d9ce114044a029e71f1f5a64fc5d140e32bd5babba6f90dd4
-size 424
+//
+//  NSProcessInfo+SQRLVersionExtensions.h
+//  Squirrel
+//
+//  Created by Justin Spahr-Summers on 2013-09-16.
+//  Copyright (c) 2013 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NSProcessInfo (SQRLVersionExtensions)
+
+// The short version string (e.g. `10.8.5`) for the running version of OS X.
+@property (nonatomic, copy, readonly) NSString *sqrl_operatingSystemShortVersionString;
+
+@end

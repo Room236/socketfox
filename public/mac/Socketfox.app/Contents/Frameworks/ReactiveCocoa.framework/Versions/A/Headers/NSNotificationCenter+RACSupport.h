@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e48a9339d28653b9d81a796b5b70edf72c89bf4b9f7c62ecbf77f1c363480c1f
-size 419
+//
+//  NSNotificationCenter+RACSupport.h
+//  ReactiveCocoa
+//
+//  Created by Josh Abernathy on 5/10/12.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSignal;
+
+@interface NSNotificationCenter (RACSupport)
+
+// Sends the NSNotification every time the notification is posted.
+- (RACSignal *)rac_addObserverForName:(NSString *)notificationName object:(id)object;
+
+@end

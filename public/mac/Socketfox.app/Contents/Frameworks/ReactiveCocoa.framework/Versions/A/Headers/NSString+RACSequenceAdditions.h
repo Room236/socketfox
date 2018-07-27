@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f3b252b50dadfc3d1d4a70e08f0ab1980e7699b56511e2a75aa56c5005c4f786
-size 547
+//
+//  NSString+RACSequenceAdditions.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2012-10-29.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSequence;
+
+@interface NSString (RACSequenceAdditions)
+
+/// Creates and returns a sequence containing strings corresponding to each
+/// composed character sequence in the receiver.
+///
+/// Mutating the receiver will not affect the sequence after it's been created.
+@property (nonatomic, copy, readonly) RACSequence *rac_sequence;
+
+@end

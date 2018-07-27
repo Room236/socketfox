@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d097f60daf1620f3a8574064c05d43ebd9ec5306e0ca9443315a1e760b6e276e
-size 807
+//
+//  NSDictionary+MTLManipulationAdditions.h
+//  Mantle
+//
+//  Created by Justin Spahr-Summers on 2012-09-24.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NSDictionary (MTLManipulationAdditions)
+
+// Merges the keys and values from the given dictionary into the receiver. If
+// both the receiver and `dictionary` have a given key, the value from
+// `dictionary` is used.
+//
+// Returns a new dictionary containing the entries of the receiver combined with
+// those of `dictionary`.
+- (NSDictionary *)mtl_dictionaryByAddingEntriesFromDictionary:(NSDictionary *)dictionary;
+
+// Creates a new dictionary with all the entries for the given keys removed from
+// the receiver.
+- (NSDictionary *)mtl_dictionaryByRemovingEntriesWithKeys:(NSSet *)keys;
+
+@end

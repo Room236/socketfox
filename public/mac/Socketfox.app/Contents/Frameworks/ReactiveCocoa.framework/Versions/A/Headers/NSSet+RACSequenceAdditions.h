@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:149b0694e237c3fe18fd20e4fcb9bf6427758f8df8c0042fa0a64e0b90b14a99
-size 482
+//
+//  NSSet+RACSequenceAdditions.h
+//  ReactiveCocoa
+//
+//  Created by Justin Spahr-Summers on 2012-10-29.
+//  Copyright (c) 2012 GitHub. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class RACSequence;
+
+@interface NSSet (RACSequenceAdditions)
+
+/// Creates and returns a sequence corresponding to the receiver.
+///
+/// Mutating the receiver will not affect the sequence after it's been created.
+@property (nonatomic, copy, readonly) RACSequence *rac_sequence;
+
+@end
