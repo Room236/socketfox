@@ -1,0 +1,225 @@
+$accent-color:       #b75800;      // orange accent color - to use when something is focused, selected, or active
+$focus-color:        #4a5958;      // background color when ui elements are focused or active
+$border-color:       $focus-color; // color for borders - same as focus color here
+$panel-background:   #3f4c4b;      // background color for panels - lighter than primary background
+$primary-background: #343f3e;      // default background color
+$text-color:         #edfffe;      // bright blueish-white text color to complement the primary background
+
+$context-active:     #3ec300;      // context color for active elements
+//$context-error:      #e3170a;      // context color for elements in an error state
+$context-error:      #d3592e;
+$context-info:       #337ca0;      // context color for informational elements
+$context-warning:    #fffc31;      // context color for elements in a warning state
+
+::selection {
+    background-color: $accent-color;
+}
+
+body {
+    background-color: $primary-background;
+    box-sizing: content-box;
+    color: $text-color;
+    display: flex;
+    flex-direction: column;
+    font-family: "Fira Code", sans-serif;
+    margin: 0;
+    height: 100vh;
+}
+
+.builder {
+    background-color: $panel-background;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    position: relative; // fix for jQuery UI resize handles
+    width: 256px;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    color: $text-color;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 32px;
+    margin: 0 4px;
+    outline: none;
+    padding: 0;
+    width: 32px;
+}
+
+.button:active {
+    border: 1px solid $accent-color;
+}
+
+.button:hover {
+    background-color: $focus-color;
+}
+
+.button--active {
+    color: $context-active;
+}
+
+.button--error {
+    color: $context-error;
+}
+
+.button--warning {
+    color: $context-warning;
+}
+
+#editor {
+    flex: 1;
+    height: 300px;
+    margin-bottom: 8px;
+}
+
+.editor-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.log {
+    flex: 1;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 0 16px;
+}
+
+.log__empty-message {
+    align-items: center;
+    color: $focus-color;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.log-item {
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    font-size: 12px;
+    margin: 16px 0;
+    word-wrap: break-word;
+}
+
+.log-item--error {
+     border-left: 8px solid $context-error;
+}
+
+.log-item--info {
+    border-left: 8px solid $context-info;
+}
+
+.log-item--request {
+    border-right: 8px solid $context-info;
+    margin-left: 96px;
+}
+
+.log-item--response {
+    margin-right: 96px;
+}
+
+.log-item--success {
+    border-left: 8px solid $context-active;
+}
+
+.log-item--warning {
+    border-left: 8px solid $context-warning;
+}
+
+.log-item__body {
+    padding: 16px;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.nav {
+    background-color: $panel-background;
+    display: flex;
+    padding: 8px;
+}
+
+.panel__title {
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.select-box {
+    position: relative;
+}
+
+.select-box__element {
+    -webkit-appearance: none;
+    background-color: $primary-background;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: #757575;
+    font-family: "Fira Code", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.select-box__element:focus {
+    background-color: $focus-color;
+    border: 1px solid $accent-color;
+}
+
+.select-box__element:hover {
+    background-color: $focus-color;
+}
+
+.select-box__indicator {
+    color: #757575;
+    display: block;
+    font-size: 12px;
+    line-height: 32px;
+    position: absolute;
+    right: 12px;
+    top: 0;
+}
+
+.text-box {
+    background-color: $primary-background;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: $text-color;
+    font-family: "Fira Code", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.text-box:focus {
+    background-color: $focus-color;
+    border: 1px solid $accent-color;
+}
+
+.text-box:hover {
+    background-color: $focus-color;
+}
+
+// fix for jQuery UI resize handles not showing up
+.ui-resizable-handle {
+    cursor: col-resize;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 15px;
+}

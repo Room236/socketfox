@@ -1,194 +1,213 @@
+::selection {
+  background-color: #b75800;
+}
+
 body {
-    background-color: #343f3e;
-    box-sizing: content-box;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-family: "Fira Code", sans-serif;
-    margin: 0;
-    height: 100vh;
+  background-color: #343f3e;
+  box-sizing: content-box;
+  color: #edfffe;
+  display: flex;
+  flex-direction: column;
+  font-family: "Fira Code", sans-serif;
+  margin: 0;
+  height: 100vh;
 }
 
 .builder {
-    background-color: #3f4c4b;
-    padding: 8px;
-    width: 256px;
+  background-color: #3f4c4b;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  position: relative;
+  width: 256px;
 }
 
 .button {
-    border: none;
-    border-radius: 8px;
-    background-color: #3f4c4b;
-    color: white;
-    cursor: pointer;
-    flex-shrink: 0;
-    height: 32px;
-    margin: 0 4px;
-    outline: none;
-    padding: 0;
-    width: 32px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #edfffe;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 32px;
+  margin: 0 4px;
+  outline: none;
+  padding: 0;
+  width: 32px;
 }
 
 .button:active {
-    border: 1px solid #b75800;
+  border: 1px solid #b75800;
 }
 
 .button:hover {
-    background-color: #4a5958;
+  background-color: #4a5958;
 }
 
 .button--active {
-    color: #3ec300;
+  color: #3ec300;
 }
 
 .button--error {
-    color: #e3170a;
+  color: #d3592e;
 }
 
 .button--warning {
-    color: #fffc31;
+  color: #fffc31;
 }
 
 #editor {
-    height: 300px;
-    margin-bottom: 8px;
+  flex: 1;
+  height: 300px;
+  margin-bottom: 8px;
 }
 
-#send {
-    display: flex;
-    justify-content: flex-end;
+.editor-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .log {
-    flex: 1;
-    height: 100%;
-    list-style: none;
-    margin: 0;
-    overflow-y: scroll;
-    padding: 0 16px;
+  flex: 1;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 0 16px;
 }
 
 .log__empty-message {
-    align-items: center;
-    color: #4a5958;
-    display: flex;
-    justify-content: center;
-    height: 100%;
+  align-items: center;
+  color: #4a5958;
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }
 
 .log-item {
-    border: 1px solid #4a5958;
-    border-radius: 8px;
-    font-size: 12px;
-    margin: 16px 0;
-    word-wrap: break-word;
+  border: 1px solid #4a5958;
+  border-radius: 8px;
+  font-size: 12px;
+  margin: 16px 0;
+  word-wrap: break-word;
 }
 
 .log-item--error {
-     border-left: 8px solid #e3170a;
+  border-left: 8px solid #d3592e;
 }
 
 .log-item--info {
-    border-left: 8px solid #337ca0;
+  border-left: 8px solid #337ca0;
 }
 
 .log-item--request {
-    border-right: 8px solid #337ca0;
-    margin-left: 96px;
+  border-right: 8px solid #337ca0;
+  margin-left: 96px;
 }
 
 .log-item--response {
-    margin-right: 96px;
+  margin-right: 96px;
 }
 
 .log-item--success {
-    border-left: 8px solid #3ec300;
+  border-left: 8px solid #3ec300;
 }
 
 .log-item--warning {
-    border-left: 8px solid #fffc31;
+  border-left: 8px solid #fffc31;
 }
 
 .log-item__body {
-    padding: 16px;
+  padding: 16px;
 }
 
 main {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 }
 
 .nav {
-    background-color: #3f4c4b;
-    display: flex;
-    padding: 8px;
+  background-color: #3f4c4b;
+  display: flex;
+  padding: 8px;
 }
 
 .panel__title {
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 0;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 0;
 }
 
 .select-box {
-    position: relative;
+  position: relative;
 }
 
 .select-box__element {
-    -webkit-appearance: none;
-    background-color: #343f3e;
-    border: 1px solid #4a5958;
-    border-radius: 8px;
-    color: #757575;
-    font-family: "Fira Code", sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    margin-bottom: 8px;
-    outline: none;
-    padding: 8px;
-    width: 100%;
+  -webkit-appearance: none;
+  background-color: #343f3e;
+  border: 1px solid #4a5958;
+  border-radius: 8px;
+  color: #757575;
+  font-family: "Fira Code", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  outline: none;
+  padding: 8px;
+  width: 100%;
 }
 
 .select-box__element:focus {
-    background-color: #4a5958;
-    border: 1px solid #b75800;
+  background-color: #4a5958;
+  border: 1px solid #b75800;
 }
 
 .select-box__element:hover {
-    background-color: #4a5958;
+  background-color: #4a5958;
 }
 
 .select-box__indicator {
-    color: #757575;
-    display: block;
-    font-size: 12px;
-    line-height: 32px;
-    position: absolute;
-    right: 12px;
-    top: 0;
+  color: #757575;
+  display: block;
+  font-size: 12px;
+  line-height: 32px;
+  position: absolute;
+  right: 12px;
+  top: 0;
 }
 
 .text-box {
-    background-color: #343f3e;
-    border: 1px solid #4a5958;
-    border-radius: 8px;
-    box-sizing: border-box;
-    color: white;
-    font-family: "Fira Code", sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    margin-bottom: 8px;
-    outline: none;
-    padding: 8px;
-    width: 100%;
+  background-color: #343f3e;
+  border: 1px solid #4a5958;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #edfffe;
+  font-family: "Fira Code", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  outline: none;
+  padding: 8px;
+  width: 100%;
 }
 
 .text-box:focus {
-    background-color: #4a5958;
-    border: 1px solid #b75800;
+  background-color: #4a5958;
+  border: 1px solid #b75800;
 }
 
 .text-box:hover {
-    background-color: #4a5958;
+  background-color: #4a5958;
 }
+
+.ui-resizable-handle {
+  cursor: col-resize;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+}
+
+/*# sourceMappingURL=styles.css.map */

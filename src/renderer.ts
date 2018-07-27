@@ -4,12 +4,30 @@ import * as SocketIOClient from "socket.io-client";
 import * as SocketIOWildcard from "socketio-wildcard";
 import {Log} from "./log";
 import {PrettyPrint} from "./prettyprint";
+import "./theme.js";
+import {WindowPrefs} from "./types";
+
+// load jquery-ui (it requires a global reference to jQuery)
+global["jQuery"] = $;
+import "jqueryui";
+
+// get shared window prefs
+const prefs: WindowPrefs = remote.getGlobal("prefs");
 
 // load ace editor
 const editor = ace.edit("editor");
-editor.setTheme("ace/theme/tomorrow_night_eighties");
+editor.setTheme("ace/theme/socketfox");
 editor.session.setMode("ace/mode/json");
 editor.renderer.setShowGutter(false);
+
+// make the builder resizable
+$(".builder").width(prefs.builderWidth).resizable({
+    "handles": "e",
+    "minWidth": 256,
+    "stop": (event: Event, ui: JQueryUI.ResizableUIParams) => {
+        prefs.builderWidth = ui.size["width"];
+    }
+});
 
 // create socket.io client
 let active: boolean = false; // whether the connection is "active" (connecting, connected, error, etc.)
@@ -188,7 +206,7 @@ $newEventType.on("change", () => {
 });
 
 // handle send button
-$("#send__button").on("click", () => {
+$("#send").on("click", () => {
     const name: string = <string>($("#new-event-name").val());
     const data: string = editor.getValue();
     if (name === "" || !active) {

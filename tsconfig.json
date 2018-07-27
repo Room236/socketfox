@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "allowJs": true,
         "baseUrl": "./src",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -9,7 +10,8 @@
         "target": "es2016"
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "index.d.ts"
     ],
     "exclude": [
         "node_modules"

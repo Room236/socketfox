@@ -1,5 +1,5 @@
 import {BrowserWindow} from "electron";
-import * as Path from "path";
+import {loadAsset} from "./assets";
 
 export class InstanceWindow {
 
@@ -27,7 +27,7 @@ export class InstanceWindow {
         // create a new browser window
         this.window = new BrowserWindow({
             "height": 600,
-            "icon": Path.join(__dirname, "assets/icons/png/64x64.png"),
+            "icon": loadAsset("icons/64x64.png"),
             "show": false,
             "width": 800
         });
@@ -47,7 +47,7 @@ export class InstanceWindow {
      * Load the window and display it when ready
      */
     public load() {
-        this.window.loadFile("assets/views/index.html");
+        this.window.loadFile(loadAsset("views/index.html"));
 
         // add window to global window array
         InstanceWindow._windows.unshift(this);

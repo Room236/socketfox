@@ -2,3 +2,5 @@ node_modules/
 build/
 bundle/
 .idea/
+assets/css/
+*.log

@@ -17,6 +17,11 @@ function createWindow() {
 function init() {
     const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
 
+    // initialize window prefs
+    global["prefs"] = {
+        "builderWidth": 256 // width of builder panel for new windows
+    };
+
     // create the application menus
     const menuTemplate: MenuItemConstructorOptions[] = [
         {
