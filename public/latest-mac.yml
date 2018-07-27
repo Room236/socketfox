@@ -1,0 +1,10 @@
+version: 0.3.0
+files:
+  - url: Socketfox-0.3.0-mac.zip
+    sha512: Vw0qF62arj/O9PbnRD2fVGgOQxdGoXC8T1SKAx1BVBUQ7BPeoszpQEROkgJsuY3McL98RIurfomEfuI9KgAVbA==
+  - url: Socketfox-0.3.0.dmg
+    sha512: BV5i321Y3VCmtiSQf02FWljiGlvg0eDvL6UETflPjMnJ+Jw4EXR/RKSyh2drXgzdG6s0S22uKcQZ2iRmwHkAoA==
+    size: 63464739
+path: Socketfox-0.3.0-mac.zip
+sha512: Vw0qF62arj/O9PbnRD2fVGgOQxdGoXC8T1SKAx1BVBUQ7BPeoszpQEROkgJsuY3McL98RIurfomEfuI9KgAVbA==
+releaseDate: '2018-07-27T21:16:08.526Z'

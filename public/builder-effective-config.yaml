@@ -1,0 +1,10 @@
+directories:
+  output: public
+  buildResources: build
+appId: com.richardkriesman.socketfox
+mac:
+  publish:
+    provider: generic
+    url: 'https://socketfox.richardkriesman.com'
+    channel: latest
+electronVersion: 2.0.5
