@@ -1,6 +1,7 @@
 import {app, Menu, MenuItemConstructorOptions} from "electron";
 import openAboutWindow from "electron-about-window";
 import * as isDev from "electron-is-dev";
+import {autoUpdater, UpdateCheckResult} from "electron-updater";
 import {InstanceWindow} from "./instanceWindow";
 
 /**
@@ -106,6 +107,16 @@ function init() {
 
     // create main window
     createWindow();
+
+    // check for updates
+    autoUpdater.checkForUpdatesAndNotify()
+        .then((result?: UpdateCheckResult) => {
+            return; // TODO: Do something here?
+        })
+        .catch((ex: Error) => {
+            console.error("Update check failed");
+            console.error(ex);
+        });
 
 }
 

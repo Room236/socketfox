@@ -1,15 +1,35 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "private": true,
     "version": "0.3.0",
     "license": "GPL-3.0-only",
-    "main": "build/main.js",
+    "author": {
+        "name": "Richard Kriesman",
+        "email": "rkriesman@gmail.com",
+        "url": "https://richardkriesman.com"
+    },
+    "build": {
+        "appId": "com.richardkriesman.socketfox",
+        "directories": {
+            "output": "public"
+        },
+        "mac": {
+            "publish": {
+                "provider": "generic",
+                "url": "https://socketfox.richardkriesman.com",
+                "channel": "latest"
+            }
+        }
+    },
+    "private": true,
+    "main": "app/dist/main.js",
     "scripts": {
         "build": "yarn run-script build",
         "bundle:linux": "yarn run-script bundle-linux.sh",
         "bundle:macos": "yarn run-script bundle-macos",
         "bundle:windows": "yarn run-script bundle-win",
+        "dist": "electron-builder",
+        "pack": "electron-builder --dir",
         "run-script": "chmod +x scripts/run-script.sh && scripts/run-script.sh",
         "start": "electron ."
     },
@@ -20,6 +40,7 @@
         "@types/jqueryui": "^1.12.2",
         "@types/socket.io-client": "^1.4.32",
         "electron": "^2.0.0",
+        "electron-builder": "^20.26.0",
         "electron-packager": "^12.1.0",
         "sass": "^1.10.1",
         "tslint": "^5.10.0",
@@ -30,6 +51,7 @@
         "debug": "^3.1.0",
         "electron-about-window": "^1.12.1",
         "electron-is-dev": "^0.3.0",
+        "electron-updater": "^3.0.3",
         "jquery": "^3.3.1",
         "jqueryui": "^1.11.1",
         "socket.io-client": "^2.1.1",

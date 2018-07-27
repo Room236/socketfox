@@ -1,6 +1,5 @@
-node_modules/
-build/
-bundle/
 .idea/
+node_modules/
+dist/
 assets/css/
 *.log
