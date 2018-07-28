@@ -1,10 +1,10 @@
-version: 0.3.0
+version: 0.4.0
 files:
-  - url: Socketfox-0.3.0-mac.zip
-    sha512: 5FUAJdawJ0/AmW0msOKGaOEaXvIugS77APpbKW41Cq+axcad6x67g7J+GC60A0U0RdUZ6T1eVJX0QC/yEKe5kA==
-  - url: Socketfox-0.3.0.dmg
-    sha512: Tijyy22DnDNVsbDpTw621YRsVNiaxyvSeLLxiS+fdo20js9Avn6Zd8xcbl0HYD9HPp2t2XL5jPl9XfzH70P0WQ==
-    size: 63464781
-path: Socketfox-0.3.0-mac.zip
-sha512: 5FUAJdawJ0/AmW0msOKGaOEaXvIugS77APpbKW41Cq+axcad6x67g7J+GC60A0U0RdUZ6T1eVJX0QC/yEKe5kA==
-releaseDate: '2018-07-27T21:51:36.908Z'
+  - url: Socketfox-0.4.0-mac.zip
+    sha512: ltm9T4uQIYDNWLdy0QRfR+FnPpXPDaKIa2Gql0sF4DbFhDNEXH1A88UYxpDY4LuXy/eEwcZrfjeVTm4lcQfEgw==
+  - url: Socketfox-0.4.0.dmg
+    sha512: GIsNvcrLkmxsVS08bRxS4mw5LRhbJ+ajQQpKoGOndzXGE2YFUUhD60CGRO4z0vaPCRsbOXT51/7tqoxCTmEBCg==
+    size: 63464783
+path: Socketfox-0.4.0-mac.zip
+sha512: ltm9T4uQIYDNWLdy0QRfR+FnPpXPDaKIa2Gql0sF4DbFhDNEXH1A88UYxpDY4LuXy/eEwcZrfjeVTm4lcQfEgw==
+releaseDate: '2018-07-28T04:44:31.730Z'

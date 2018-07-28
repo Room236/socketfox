@@ -6,13 +6,17 @@ $primary-background: #343f3e;      // default background color
 $text-color:         #edfffe;      // bright blueish-white text color to complement the primary background
 
 $context-active:     #3ec300;      // context color for active elements
-//$context-error:      #e3170a;      // context color for elements in an error state
-$context-error:      #d3592e;
+$context-error:      #d3592e;      // context color for elements in an error state
 $context-info:       #337ca0;      // context color for informational elements
+$context-variable:   #48aee0;      // context color for elements that reference a variable
 $context-warning:    #fffc31;      // context color for elements in a warning state
 
 ::selection {
     background-color: $accent-color;
+}
+
+#attach {
+    margin-right: auto;
 }
 
 body {
@@ -69,6 +73,12 @@ body {
     color: $context-warning;
 }
 
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 #editor {
     flex: 1;
     height: 300px;
@@ -81,6 +91,7 @@ body {
 }
 
 .log {
+    display: block;
     flex: 1;
     height: 100%;
     list-style: none;
@@ -98,40 +109,64 @@ body {
 }
 
 .log-item {
-    border: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
     border-radius: 8px;
+    display: inline-block;
     font-size: 12px;
-    margin: 16px 0;
+    max-width: calc(100% - 96px);
     word-wrap: break-word;
 }
 
 .log-item--error {
-     border-left: 8px solid $context-error;
+    border-left: 8px solid $context-error;
+    border-right: 8px solid $context-error;
 }
 
 .log-item--info {
     border-left: 8px solid $context-info;
+    border-right: 8px solid $context-info;
 }
 
 .log-item--request {
-    border-right: 8px solid $context-info;
-    margin-left: 96px;
+    border-left: 1px solid $border-color !important;
+    float: right;
+    margin-left: auto;
 }
 
 .log-item--response {
-    margin-right: 96px;
+    border-right: 1px solid $border-color !important;
+    margin-right: auto;
+}
+
+.log-item--service {
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    max-width: none;
+    text-align: center;
+    width: 100%;
 }
 
 .log-item--success {
     border-left: 8px solid $context-active;
+    border-right: 8px solid $context-active;
 }
 
 .log-item--warning {
     border-left: 8px solid $context-warning;
+    border-right: 8px solid $context-warning;
 }
 
 .log-item__body {
     padding: 16px;
+}
+
+.log-row {
+    margin: 16px 0;
+}
+
+.log-text-variable {
+    color: $context-variable;
 }
 
 main {

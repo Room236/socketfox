@@ -20,15 +20,16 @@
             <input type="text" id="new-event-name" class="text-box" placeholder="Event name" />
             <div id="editor"></div>
             <div class="editor-buttons">
+                <button id="attach" class="button" title="Attach"><i class="fas fa-paperclip"></i></button>
                 <button id="send" class="button" title="Send"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-        <ul class="log">
-            <li class="log__empty-message">No events</li>
-        </ul>
+        <div class="log">
+            <div class="log__empty-message">No events</div>
+        </div>
     </main>
     <script type="text/javascript">
-        require("../../dist/renderer");
+        require("../../dist/renderer/renderer");
     </script>
 </body>
 </html>

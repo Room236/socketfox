@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "license": "GPL-3.0-only",
     "author": {
         "name": "Richard Kriesman",
@@ -22,7 +22,7 @@
         }
     },
     "private": true,
-    "main": "app/dist/main.js",
+    "main": "app/dist/main/main.js",
     "scripts": {
         "build": "yarn run-script build",
         "bundle:linux": "yarn run-script bundle-linux.sh",

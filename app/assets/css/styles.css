@@ -2,6 +2,10 @@
   background-color: #b75800;
 }
 
+#attach {
+  margin-right: auto;
+}
+
 body {
   background-color: #343f3e;
   box-sizing: content-box;
@@ -56,6 +60,12 @@ body {
   color: #fffc31;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 #editor {
   flex: 1;
   height: 300px;
@@ -68,6 +78,7 @@ body {
 }
 
 .log {
+  display: block;
   flex: 1;
   height: 100%;
   list-style: none;
@@ -85,40 +96,64 @@ body {
 }
 
 .log-item {
-  border: 1px solid #4a5958;
+  border-top: 1px solid #4a5958;
+  border-bottom: 1px solid #4a5958;
   border-radius: 8px;
+  display: inline-block;
   font-size: 12px;
-  margin: 16px 0;
+  max-width: calc(100% - 96px);
   word-wrap: break-word;
 }
 
 .log-item--error {
   border-left: 8px solid #d3592e;
+  border-right: 8px solid #d3592e;
 }
 
 .log-item--info {
   border-left: 8px solid #337ca0;
+  border-right: 8px solid #337ca0;
 }
 
 .log-item--request {
-  border-right: 8px solid #337ca0;
-  margin-left: 96px;
+  border-left: 1px solid #4a5958 !important;
+  float: right;
+  margin-left: auto;
 }
 
 .log-item--response {
-  margin-right: 96px;
+  border-right: 1px solid #4a5958 !important;
+  margin-right: auto;
+}
+
+.log-item--service {
+  border-left: 1px solid #4a5958;
+  border-right: 1px solid #4a5958;
+  max-width: none;
+  text-align: center;
+  width: 100%;
 }
 
 .log-item--success {
   border-left: 8px solid #3ec300;
+  border-right: 8px solid #3ec300;
 }
 
 .log-item--warning {
   border-left: 8px solid #fffc31;
+  border-right: 8px solid #fffc31;
 }
 
 .log-item__body {
   padding: 16px;
+}
+
+.log-row {
+  margin: 16px 0;
+}
+
+.log-text-variable {
+  color: #48aee0;
 }
 
 main {

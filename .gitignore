@@ -2,5 +2,5 @@
 .idea/
 node_modules/
 dist/
-assets/css/
+app/assets/css/
 *.log
