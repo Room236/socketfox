@@ -1,0 +1,9 @@
+version: 0.4.0
+files:
+  - url: socketfox-0.4.0-x86_64.AppImage
+    sha512: 6/OmQpsud6LebHW3/ZB3gMlTBEQfjXv+rHxFnyjkhebUuzEGhuvKQmerdAp2sxkdr3DMJyPRYtWsqmIDS/yuKw==
+    size: 64975754
+    blockMapSize: 68814
+path: socketfox-0.4.0-x86_64.AppImage
+sha512: 6/OmQpsud6LebHW3/ZB3gMlTBEQfjXv+rHxFnyjkhebUuzEGhuvKQmerdAp2sxkdr3DMJyPRYtWsqmIDS/yuKw==
+releaseDate: '2018-09-26T03:38:42.743Z'
