@@ -2,10 +2,10 @@
     "compilerOptions": {
         "allowJs": true,
         "baseUrl": "./app/src",
+        "inlineSourceMap": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "outDir": "./app/dist",
-        "sourceMap": true,
         "sourceRoot": "./app/src",
         "target": "es2016"
     },

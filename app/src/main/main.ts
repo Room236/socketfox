@@ -1,17 +1,24 @@
 import {app, dialog, Menu, MenuItemConstructorOptions} from "electron";
 import openAboutWindow from "electron-about-window";
 import * as isDev from "electron-is-dev";
-import {autoUpdater, UpdateCheckResult} from "electron-updater";
+import { autoUpdater, UpdateCheckResult, UpdateInfo } from "electron-updater";
 import * as fs from "fs";
 import * as path from "path";
 import {loadAsset} from "../assets";
 import {InstanceWindow} from "./instanceWindow";
+
+const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
+
+let isUpdateAvailable: boolean = false; // whether an update is known to be available
 
 /**
  * Creates a new window
  */
 function createWindow() {
     const window: InstanceWindow = new InstanceWindow();
+    if (isUpdateAvailable) {
+        window.displayUpdateBanner(!isDarwin); // macOS doesn't allow auto-updates unless the binary is signed
+    }
 
     // handle prompting the user for a file on disk
     window.on("request-file", (event: Electron.Event) => {
@@ -38,6 +45,11 @@ function createWindow() {
         });
     });
 
+    // handle requesting to restart and install an update
+    window.on("install-update", () => {
+        autoUpdater.quitAndInstall();
+    });
+
     window.load();
 }
 
@@ -45,7 +57,6 @@ function createWindow() {
  * Initializes the app on startup
  */
 function init() {
-    const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
 
     // initialize window prefs
     global["prefs"] = {
@@ -138,14 +149,32 @@ function init() {
     createWindow();
 
     // check for updates
-    autoUpdater.checkForUpdatesAndNotify()
-        .then((result?: UpdateCheckResult) => {
-            return; // TODO: Do something here?
-        })
+    autoUpdater.autoDownload = false;
+    autoUpdater.checkForUpdates()
         .catch((ex: Error) => {
-            console.error("Update check failed");
             console.error(ex);
         });
+    autoUpdater.on("update-available", () => {
+        if (isDarwin) { // macOS doesn't support auto-updates unless the binary is signed
+            isUpdateAvailable = true;
+            InstanceWindow.windows.forEach((w) => { // show the banner
+                w.displayUpdateBanner(false);
+            });
+        } else { // not macOS, auto-updates should work
+            autoUpdater.downloadUpdate()
+                .then(() => { // update was downloaded
+                    console.log("Downloaded update, waiting for restart");
+
+                    // show the banner
+                    isUpdateAvailable = true;
+                    InstanceWindow.windows.forEach((w) => {
+                        w.displayUpdateBanner();
+                    });
+
+                })
+                .catch((err) => console.error(err));
+        }
+    });
 
 }
 
@@ -159,7 +188,7 @@ app.on("window-all-closed", function () {
     }
 });
 
-// app is reactivated on macos after it was deactivated (but not closed) - make a new window
+// app is reactivated on macOS after it was deactivated (but not closed) - make a new window
 app.on("activate", function () {
     if (InstanceWindow.windows.length === 0) {
         createWindow();

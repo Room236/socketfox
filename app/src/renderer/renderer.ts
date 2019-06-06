@@ -307,3 +307,21 @@ $(document).on("keydown", (e: JQuery.Event) => {
 $("#clear__button").on("click", () => {
     Log.clear();
 });
+
+// handle restart button
+$("#restart").on("click", () => {
+    ipcRenderer.send("install-update");
+});
+
+// handle display update banner command
+ipcRenderer.on("display-update-banner", (event: Electron.Event, allowInstall: boolean) => {
+    console.log(allowInstall);
+    if (allowInstall) {
+        $("#restart").show();
+        $("#update-banner__install-prompt").show();
+    } else {
+        $("#restart").hide();
+        $("#update-banner__install-prompt").hide();
+    }
+    $("#update-banner").show();
+});

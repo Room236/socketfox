@@ -32,6 +32,8 @@ export class InstanceWindow {
 
     private currentIndex: number;          // the current index of the window in the global window array
     private ipcHandlers: HandlerMap = {}; // map of ipc channels to handler functions
+    private isReady: boolean = false; // whether the window is ready
+    private onReadyHandlers: Array<() => void> = []; // array of handlers to be executed when ready
 
     public constructor() {
 
@@ -52,6 +54,15 @@ export class InstanceWindow {
         // handle window closed
         this.window.on("closed", this.onClosed.bind(this));
 
+    }
+
+    /**
+     * Displays the update notification banner.
+     *
+     * @param allowInstall Whether allow the user to quit and install the update.
+     */
+    public displayUpdateBanner(allowInstall: boolean = true): void {
+        this.waitForReady(() => this.send("display-update-banner", allowInstall));
     }
 
     /**
@@ -86,6 +97,16 @@ export class InstanceWindow {
 
         // bind the forward handler to the ipc event
         ipcMain.on(channel, this.ipcHandlers[channel].forwardHandler);
+    }
+
+    /**
+     * Sends data to the InstanceWindow's renderer.
+     *
+     * @param channel Name of the channel to send the data in
+     * @param args Arguments to send
+     */
+    public send(channel: string, ...args: any[]): void {
+        this.window.webContents.send(channel, ...args);
     }
 
     /**
@@ -129,6 +150,22 @@ export class InstanceWindow {
      */
     private onReady(): void {
         this.window.show();
+        this.isReady = true;
+        this.onReadyHandlers.forEach((fn) => fn());
+    }
+
+    /**
+     * Schedules a function to be executed when the window is ready. If the window is already ready, the function will
+     * be executed immediately.
+     *
+     * @param fn Function to delay
+     */
+    private waitForReady(fn: () => void): void {
+        if (this.isReady) {
+            fn();
+        } else {
+            this.onReadyHandlers.push(fn);
+        }
     }
 
 }

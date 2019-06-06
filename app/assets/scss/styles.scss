@@ -1,15 +1,16 @@
-$accent-color:       #b75800;      // orange accent color - to use when something is focused, selected, or active
-$focus-color:        #4a5958;      // background color when ui elements are focused or active
-$border-color:       $focus-color; // color for borders - same as focus color here
-$panel-background:   #3f4c4b;      // background color for panels - lighter than primary background
-$primary-background: #343f3e;      // default background color
-$text-color:         #edfffe;      // bright blueish-white text color to complement the primary background
+$accent-color:        #b75800;      // orange accent color - to use when something is focused, selected, or active
+$focus-color:         #4a5958;      // background color when ui elements are focused or active
+$focus-color-inverse: #d16900;      // background color when inverse ui elements (background color is accent) is focused
+$border-color:        $focus-color; // color for borders - same as focus color here
+$panel-background:    #3f4c4b;      // background color for panels - lighter than primary background
+$primary-background:  #343f3e;      // default background color
+$text-color:          #edfffe;      // bright blueish-white text color to complement the primary background
 
-$context-active:     #3ec300;      // context color for active elements
-$context-error:      #d3592e;      // context color for elements in an error state
-$context-info:       #337ca0;      // context color for informational elements
-$context-variable:   #48aee0;      // context color for elements that reference a variable
-$context-warning:    #fffc31;      // context color for elements in a warning state
+$context-active:      #3ec300;      // context color for active elements
+$context-error:       #d3592e;      // context color for elements in an error state
+$context-info:        #337ca0;      // context color for informational elements
+$context-variable:    #48aee0;      // context color for elements that reference a variable
+$context-warning:     #fffc31;      // context color for elements in a warning state
 
 ::selection {
     background-color: $accent-color;
@@ -17,6 +18,19 @@ $context-warning:    #fffc31;      // context color for elements in a warning st
 
 #attach {
     margin-right: auto;
+}
+
+.banner {
+    align-items: center;
+    background-color: $accent-color;
+    display: flex;
+    padding: 8px;
+}
+
+.banner__text {
+    flex: 1;
+    font-size: 12px;
+    margin: 0 8px;
 }
 
 body {
@@ -59,6 +73,14 @@ body {
 
 .button:hover {
     background-color: $focus-color;
+}
+
+.button.button--inverse:active {
+    border: 1px solid $text-color;
+}
+
+.button.button--inverse:hover {
+    background-color: $focus-color-inverse;
 }
 
 .button--active {

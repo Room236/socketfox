@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.4.0",
+    "version": "0.3.0",
     "license": "GPL-3.0-only",
     "author": {
         "name": "Richard Kriesman",
@@ -31,7 +31,11 @@
                 "provider": "generic",
                 "url": "https://socketfox.richardkriesman.com",
                 "channel": "latest"
-            }
+            },
+            "target": "dmg"
+        },
+        "win": {
+            "target": "portable"
         }
     },
     "private": true,
