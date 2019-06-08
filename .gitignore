@@ -4,3 +4,4 @@ node_modules/
 dist/
 app/assets/css/
 *.log
+*.scssc

@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "license": "GPL-3.0-only",
     "author": {
         "name": "Richard Kriesman",
@@ -21,7 +21,7 @@
             "icon": "build/icon.icns",
             "publish": {
                 "provider": "generic",
-                "url": "https://socketfox.richardkriesman.com",
+                "url": "https://updates.room236.com/socketfox",
                 "channel": "latest"
             },
             "target": "AppImage"
@@ -29,13 +29,18 @@
         "mac": {
             "publish": {
                 "provider": "generic",
-                "url": "https://socketfox.richardkriesman.com",
+                "url": "https://updates.room236.com/socketfox",
                 "channel": "latest"
             },
             "target": "dmg"
         },
         "win": {
-            "target": "portable"
+            "publish": {
+                "provider": "generic",
+                "url": "https://updates.room236.com/socketfox",
+                "channel": "latest"
+            },
+            "target": "nsis"
         }
     },
     "private": true,
@@ -45,7 +50,7 @@
         "bundle:linux": "yarn run-script bundle-linux.sh",
         "bundle:macos": "yarn run-script bundle-macos",
         "bundle:windows": "yarn run-script bundle-win",
-        "dist": "electron-builder",
+        "dist": "export CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder",
         "pack": "electron-builder --dir",
         "run-script": "chmod +x scripts/run-script.sh && scripts/run-script.sh",
         "start": "electron ."
