@@ -1,7 +1,7 @@
 {
     "name": "socketfox",
     "productName": "Socketfox",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "license": "GPL-3.0-only",
     "author": {
         "name": "Richard Kriesman",
@@ -21,7 +21,7 @@
             "icon": "build/icon.icns",
             "publish": {
                 "provider": "generic",
-                "url": "https://updates.room236.com/socketfox",
+                "url": "https://opensource.room236.com/socketfox",
                 "channel": "latest"
             },
             "target": "AppImage"
@@ -29,7 +29,7 @@
         "mac": {
             "publish": {
                 "provider": "generic",
-                "url": "https://updates.room236.com/socketfox",
+                "url": "https://opensource.room236.com/socketfox",
                 "channel": "latest"
             },
             "target": "dmg"
@@ -37,7 +37,7 @@
         "win": {
             "publish": {
                 "provider": "generic",
-                "url": "https://updates.room236.com/socketfox",
+                "url": "https://opensource.room236.com/socketfox",
                 "channel": "latest"
             },
             "target": "nsis"

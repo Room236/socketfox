@@ -5,7 +5,8 @@ import { autoUpdater, UpdateCheckResult, UpdateInfo } from "electron-updater";
 import * as fs from "fs";
 import * as path from "path";
 import {loadAsset} from "../assets";
-import {InstanceWindow} from "./instanceWindow";
+import {AbstractWindow} from "./window/AbstractWindow";
+import { ConnectionWindow } from "./window/ConnectionWindow";
 
 const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
 
@@ -15,42 +16,11 @@ let isUpdateAvailable: boolean = false; // whether an update is known to be avai
  * Creates a new window
  */
 function createWindow() {
-    const window: InstanceWindow = new InstanceWindow();
+    const window = new ConnectionWindow();
     if (isUpdateAvailable) {
         window.displayUpdateBanner(!isDarwin); // macOS doesn't allow auto-updates unless the binary is signed
     }
-
-    // handle prompting the user for a file on disk
-    window.on("request-file", (event: Electron.Event) => {
-        dialog.showOpenDialog(window.window, {
-            "title": "Select attachment"
-        }, (filePaths: string[]) => { // response from dialog
-            if (!filePaths || filePaths.length === 0) { // no file was selected, don't do anything
-                return;
-            }
-
-            // read the file into a buffer
-            fs.readFile(filePaths[0], ((err: Error, data: Buffer) => {
-                if (err) { // error occurred, print error to console
-                    console.error(err);
-                    return;
-                }
-
-                // send file buffer back to renderer
-                event.sender.send("attach-file", {
-                    "data": data,
-                    "name": path.basename(filePaths[0])
-                });
-            }));
-        });
-    });
-
-    // handle requesting to restart and install an update
-    window.on("install-update", () => {
-        autoUpdater.quitAndInstall();
-    });
-
-    window.load();
+    window.present();
 }
 
 /**
@@ -98,8 +68,8 @@ function init() {
                 {
                     "accelerator": "CommandOrControl+W",
                     "click": () => {
-                        if (InstanceWindow.windows.length > 0) {
-                            InstanceWindow.windows[0].window.close();
+                        if (AbstractWindow.windows.length > 0) {
+                            AbstractWindow.windows[0].close();
                         }
                     },
                     "label": "Close Window"
@@ -157,8 +127,10 @@ function init() {
     autoUpdater.on("update-available", () => {
         if (isDarwin) { // macOS doesn't support auto-updates unless the binary is signed
             isUpdateAvailable = true;
-            InstanceWindow.windows.forEach((w) => { // show the banner
-                w.displayUpdateBanner(false);
+            AbstractWindow.windows.forEach((w) => { // show the banner
+                if (w instanceof ConnectionWindow) {
+                    w.displayUpdateBanner(false);
+                }
             });
         } else { // not macOS, auto-updates should work
             autoUpdater.downloadUpdate()
@@ -167,8 +139,10 @@ function init() {
 
                     // show the banner
                     isUpdateAvailable = true;
-                    InstanceWindow.windows.forEach((w) => {
-                        w.displayUpdateBanner();
+                    AbstractWindow.windows.forEach((w) => {
+                        if (w instanceof ConnectionWindow) {
+                            w.displayUpdateBanner(true);
+                        }
                     });
 
                 })
@@ -190,7 +164,7 @@ app.on("window-all-closed", function () {
 
 // app is reactivated on macOS after it was deactivated (but not closed) - make a new window
 app.on("activate", function () {
-    if (InstanceWindow.windows.length === 0) {
+    if (AbstractWindow.windows.length === 0) {
         createWindow();
     }
 });

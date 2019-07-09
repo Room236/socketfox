@@ -2,6 +2,10 @@ import {ipcRenderer, remote} from "electron";
 import * as $ from "jquery";
 import * as SocketIOClient from "socket.io-client";
 import * as SocketIOWildcard from "socketio-wildcard";
+import { FileAttachEvent } from "../common/event/FileAttachEvent";
+import { FileRequestEvent } from "../common/event/FileRequestEvent";
+import { UpdateAvailableEvent } from "../common/event/UpdateAvailableEvent";
+import { UpdateInstallEvent } from "../common/event/UpdateInstallEvent";
 import {PrettyPrint} from "../prettyprint";
 import {WindowPrefs} from "../types";
 import {Log, LogType} from "./log";
@@ -256,17 +260,17 @@ $("#connect").on("click", () => {
 
 // handle attach button - attach a file to a variable
 $("#attach").on("click", () => {
-    ipcRenderer.send("request-file");
+    ipcRenderer.send(FileRequestEvent.eventName, new FileRequestEvent());
 });
 
 // handle a file attachment buffer being returned from the main process
-ipcRenderer.on("attach-file", (event: Electron.Event, file: object) => {
+ipcRenderer.on(FileAttachEvent.eventName, (electronEvent: Electron.Event, event: FileAttachEvent) => {
 
     // add buffer to array of vars
-    vars[`file${fileVarCount}`] = file["data"];
+    vars[`file${fileVarCount}`] = event.data;
 
     // notify the user that the variable has been added
-    Log.print(`Assigned file ${file["name"]} to variable \${file${fileVarCount}}`);
+    Log.print(`Assigned file ${event.name} to variable \${file${fileVarCount}}`);
 
     // increment the file variable index for next time
     fileVarCount++;
@@ -310,13 +314,12 @@ $("#clear__button").on("click", () => {
 
 // handle restart button
 $("#restart").on("click", () => {
-    ipcRenderer.send("install-update");
+    ipcRenderer.send(UpdateInstallEvent.eventName, new UpdateInstallEvent());
 });
 
 // handle display update banner command
-ipcRenderer.on("display-update-banner", (event: Electron.Event, allowInstall: boolean) => {
-    console.log(allowInstall);
-    if (allowInstall) {
+ipcRenderer.on(UpdateAvailableEvent.eventName, (electronEvent: Electron.Event, event: UpdateAvailableEvent) => {
+    if (event.isInstallAllowed) {
         $("#restart").show();
         $("#update-banner__install-prompt").show();
     } else {
