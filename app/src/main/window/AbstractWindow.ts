@@ -34,12 +34,13 @@ export abstract class AbstractWindow {
     private currentIndex: number;          // the current index of the window in the global window array
     private readonly ipcHandlers: HandlerMap = {};  // map of ipc channels to handler functions
 
-    protected constructor(height: number = 600, width: number = 800) {
+    protected constructor(height: number = 600, width: number = 800, resizable: boolean = true) {
 
         // create a new browser window
         this.window = new BrowserWindow({
             height,
             "icon": loadAsset("icons/64x64.png"),
+            resizable,
             "show": false,
             width
         });

@@ -1,10 +1,7 @@
-import {app, dialog, Menu, MenuItemConstructorOptions} from "electron";
-import openAboutWindow from "electron-about-window";
+import {app, Menu, MenuItemConstructorOptions} from "electron";
 import * as isDev from "electron-is-dev";
-import { autoUpdater, UpdateCheckResult, UpdateInfo } from "electron-updater";
-import * as fs from "fs";
-import * as path from "path";
-import {loadAsset} from "../assets";
+import { autoUpdater} from "electron-updater";
+import { AboutWindow } from "./window/AboutWindow";
 import {AbstractWindow} from "./window/AbstractWindow";
 import { ConnectionWindow } from "./window/ConnectionWindow";
 
@@ -40,16 +37,8 @@ function init() {
             "submenu": [
                 {
                     "click": () => {
-                        openAboutWindow({
-                            "bug_report_url": "https://gitlab.com/richardkriesman/socketfox",
-                            "copyright": "Copyright © 2018 Richard Kriesman.",
-                            "description": "Develop better, faster backends in Socket.IO.",
-                            "homepage": "https://gitlab.com/richardkriesman/socketfox",
-                            "icon_path": loadAsset("icons/png/1024x1024.png"),
-                            "package_json_dir": "../../",
-                            "product_name": "Socketfox",
-                            "use_version_info": false
-                        });
+                        const window = new AboutWindow();
+                        window.present();
                     },
                     "label": "About Socketfox"
                 }
