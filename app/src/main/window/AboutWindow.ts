@@ -4,6 +4,7 @@ export class AboutWindow extends AbstractWindow {
 
     public constructor() {
         super(380, 370, false);
+        this.window.setMenu(null);
     }
 
     protected onAfterClosed(): void {}
