@@ -29,7 +29,7 @@ jobs:
               uses: actions/upload-artifact@v1
               with:
                   name: styles
-                  path: app/assets/css
+                  path: app/assets/scss
     package-linux:
         name: Package for Linux
         needs: build
