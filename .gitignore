@@ -3,5 +3,6 @@
 node_modules/
 dist/
 app/assets/css/
+build/
 *.log
 *.scssc

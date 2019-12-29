@@ -15,7 +15,7 @@
             "synopsis": "Develop better, faster websockets in Socket.IO."
         },
         "directories": {
-            "output": "public"
+            "output": "build"
         },
         "linux": {
             "icon": "build/icon.icns",
@@ -47,11 +47,6 @@
     "main": "app/dist/main/main.js",
     "scripts": {
         "build": "yarn run-script build",
-        "bundle:linux": "yarn run-script bundle-linux.sh",
-        "bundle:macos": "yarn run-script bundle-macos",
-        "bundle:windows": "yarn run-script bundle-win",
-        "dist": "export CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder",
-        "pack": "electron-builder --dir",
         "run-script": "chmod +x scripts/run-script.sh && scripts/run-script.sh",
         "start": "electron ."
     },
