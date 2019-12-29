@@ -2,7 +2,8 @@
 .idea/
 node_modules/
 dist/
-app/assets/css/
+app/assets/scss/styles.css
+app/assets/scss/styles.css.map
 build/
 *.log
 *.scssc
