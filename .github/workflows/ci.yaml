@@ -1,0 +1,63 @@
+name: CI
+on: [pull_request]
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v2
+            - name: Set up Node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12.x'
+            - name: Install Yarn
+              run: |
+                  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+                  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+                  sudo apt update && sudo apt install --no-install-recommends yarn
+            - name: Install dependencies
+              run: yarn install
+            - name: Build
+              run: yarn build
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                  name: build
+                  path: app/dist
+            - name: Upload style artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                  name: styles
+                  path: app/assets/scss
+    package-linux:
+        name: Package for Linux
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v2
+            - name: Download build artifacts
+              uses: actions/download-artifact@v1
+              with:
+                  name: build
+                  path: app/dist
+            - name: Download style artifacts
+              uses: actions/download-artifact@v1
+              with:
+                  name: styles
+                  path: app/assets/css
+            -   name: Install Yarn
+                run: |
+                    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+                    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+                    sudo apt update && sudo apt install --no-install-recommends yarn
+            - name: Install dependencies
+              run: yarn install
+            - name: Package for Linux
+              run: yarn electron-builder
+            - name: Upload Linux package artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                  name: package-linux
+                  path: build
