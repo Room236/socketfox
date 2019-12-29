@@ -18,10 +18,8 @@ jobs:
                   sudo apt update && sudo apt install --no-install-recommends yarn
             - name: Install dependencies
               run: yarn install
-            - name: Lint
-              run: yarn tslint --project .
             - name: Build
-              run: yarn tsc
+              run: yarn build
             - name: Upload build artifacts
               uses: actions/upload-artifact@v1
               with:
