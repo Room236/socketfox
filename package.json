@@ -5,8 +5,7 @@
     "license": "GPL-3.0-only",
     "author": {
         "name": "Richard Kriesman",
-        "email": "rkriesman@gmail.com",
-        "url": "https://richardkriesman.com"
+        "email": "rkriesman@gmail.com"
     },
     "build": {
         "appId": "com.richardkriesman.socketfox",
