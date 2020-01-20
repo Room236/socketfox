@@ -21,7 +21,7 @@ jobs:
             - name: Build
               run: yarn build
             - name: Upload build artifacts
-              uses: actions/upload-artifact@v$$a1
+              uses: actions/upload-artifact@v1
               with:
                   name: build
                   path: dist
