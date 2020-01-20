@@ -2,12 +2,11 @@
     "compilerOptions": {
         "allowJs": true,
         "baseUrl": "./app/src",
-        "inlineSourceMap": true,
+        "incremental": true,
+        "jsx": "react",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "outDir": "./app/dist",
         "sourceRoot": "./app/src",
-        "target": "es2016"
+        "target": "es6"
     },
     "include": [
         "app/src/**/*"

@@ -12,6 +12,8 @@ $context-info:        #337ca0;      // context color for informational elements
 $context-variable:    #48aee0;      // context color for elements that reference a variable
 $context-warning:     #fffc31;      // context color for elements in a warning state
 
+$button-size:         32px;         // size of one side of a button
+
 ::selection {
     background-color: $accent-color;
 }
@@ -52,20 +54,23 @@ body {
     background-color: $primary-background;
     box-sizing: content-box;
     color: $text-color;
-    display: flex;
-    flex-direction: column;
     font-family: "Fira Code", sans-serif;
-    margin: 0;
     height: 100vh;
+    margin: 0;
+    overflow: hidden;
 }
 
 .builder {
     background-color: $panel-background;
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 8px 8px 0 8px;
     position: relative; // fix for jQuery UI resize handles
     width: 256px;
+}
+
+.builder > * {
+    margin-bottom: 8px;
 }
 
 .button {
@@ -76,16 +81,13 @@ body {
     cursor: pointer;
     flex-shrink: 0;
     height: 32px;
-    margin: 0 4px;
     outline: none;
     padding: 0;
     width: 32px;
 }
-
 .button:active {
     border: 1px solid $accent-color;
 }
-
 .button:hover {
     background-color: $focus-color;
 }
@@ -93,7 +95,6 @@ body {
 .button.button--inverse:active {
     border: 1px solid $text-color;
 }
-
 .button.button--inverse:hover {
     background-color: $focus-color-inverse;
 }
@@ -114,6 +115,10 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+#container {
+    height: 100%;
 }
 
 #editor {
@@ -221,7 +226,11 @@ h2 {
 .nav {
     background-color: $panel-background;
     display: flex;
-    padding: 8px;
+    padding: 8px 0 8px 8px;
+}
+
+.nav > * {
+    margin-right: 8px;
 }
 
 p {
@@ -235,10 +244,17 @@ p {
     margin-top: 0;
 }
 
+.root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .row {
     display: flex;
     flex: 1;
     flex-direction: row;
+    height: 100%;
 }
 
 .select-box {
@@ -284,24 +300,33 @@ p {
     border: 1px solid $border-color;
     border-radius: 8px;
     box-sizing: border-box;
+    width: 100%;
+}
+.text-box:focus-within {
+    background-color: $focus-color;
+    border: 1px solid $accent-color;
+}
+.text-box:hover {
+    background-color: $focus-color;
+}
+
+.text-box--right-icon {
+    padding-left: (8px * 2) + $button-size;
+}
+
+.text-box__input {
+    background-color: transparent;
+    border: none;
+    box-sizing: border-box;
     color: $text-color;
     font-family: "Fira Code", sans-serif;
     font-size: 12px;
     font-weight: 300;
-    margin-bottom: 8px;
     outline: none;
     padding: 8px;
     width: 100%;
 }
 
-.text-box:focus {
-    background-color: $focus-color;
-    border: 1px solid $accent-color;
-}
-
-.text-box:hover {
-    background-color: $focus-color;
-}
 
 // fix for jQuery UI resize handles not showing up
 .ui-resizable-handle {
