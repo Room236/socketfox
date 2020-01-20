@@ -1,8 +1,8 @@
-import { dialog as Dialog } from "electron";
+import { dialog as Dialog, OpenDialogReturnValue } from "electron";
 import { autoUpdater as AutoUpdater } from "electron-updater";
 import * as fs from "fs";
 import * as path from "path";
-import { FileAttachEvent } from "../../common/event/FileAttachEvent";
+import {FileAttachEvent} from "../../common/event/FileAttachEvent";
 import { FileRequestEvent } from "../../common/event/FileRequestEvent";
 import { UpdateAvailableEvent } from "../../common/event/UpdateAvailableEvent";
 import { UpdateInstallEvent } from "../../common/event/UpdateInstallEvent";
@@ -53,23 +53,24 @@ export class ConnectionWindow extends AbstractWindow {
     private onFileRequest(event: FileRequestEvent): void {
         Dialog.showOpenDialog(this.window, {
             "title": "Select attachment"
-        }, (filePaths: string[]) => { // response from dialog
-            if (!filePaths || filePaths.length === 0) { // no file was selected, don't do anything
-                return;
-            }
-
-            // read the file into a buffer
-            fs.readFile(filePaths[0], ((err: Error, data: Buffer) => {
-                if (err) { // error occurred, print error to console
-                    console.error(err);
+        })
+            .then((result: OpenDialogReturnValue) => {
+                if (result.canceled || result.filePaths.length === 0) { // no file was selected, don't do anything
                     return;
                 }
 
-                // send file buffer back to renderer
-                const filePath: string = path.basename(filePaths[0]);
-                this.emit(FileAttachEvent.eventName, new FileAttachEvent(filePath, data));
-            }));
-        });
+                // read the file into a buffer
+                fs.readFile(result.filePaths[0], ((err: Error, data: Buffer) => {
+                    if (err) { // error occurred, print error to console
+                        console.error(err);
+                        return;
+                    }
+
+                    // send file buffer back to renderer
+                    const filePath: string = path.basename(result.filePaths[0]);
+                    this.emit(FileAttachEvent.eventName, new FileAttachEvent(filePath, data));
+                }));
+            });
     }
 
 }

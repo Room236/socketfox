@@ -1,38 +1,26 @@
-import {ipcRenderer, remote} from "electron";
+import { ipcRenderer, remote } from "electron";
 import * as $ from "jquery";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import * as SocketIOClient from "socket.io-client";
 import * as SocketIOWildcard from "socketio-wildcard";
-import { FileAttachEvent } from "../common/event/FileAttachEvent";
-import { FileRequestEvent } from "../common/event/FileRequestEvent";
-import { UpdateAvailableEvent } from "../common/event/UpdateAvailableEvent";
-import { UpdateInstallEvent } from "../common/event/UpdateInstallEvent";
-import {PrettyPrint} from "../prettyprint";
-import {WindowPrefs} from "../types";
-import {Log, LogType} from "./log";
-import "./theme.js";
+import { FileAttachEvent } from "../../src/common/event/FileAttachEvent";
+import { FileRequestEvent } from "../../src/common/event/FileRequestEvent";
+import { UpdateAvailableEvent } from "../../src/common/event/UpdateAvailableEvent";
+import { UpdateInstallEvent } from "../../src/common/event/UpdateInstallEvent";
+import { PrettyPrint } from "../../src/prettyprint";
+import { Log, LogType } from "../../src/renderer/log";
+import { Root } from "../../src/renderer/root";
+import "../../src/renderer/theme";
+import { WindowPrefs } from "../../src/types";
 
 // load jquery-ui (it requires a global reference to jQuery)
 global["jQuery"] = $;
 import "jqueryui";
-import {isArray, isObject, isString} from "util";
+import {TextBox} from "./textBox";
 
 // get shared window prefs
 const prefs: WindowPrefs = remote.getGlobal("prefs");
-
-// load ace editor
-const editor = ace.edit("editor");
-editor.setTheme("ace/theme/socketfox");
-editor.session.setMode("ace/mode/json");
-editor.renderer.setShowGutter(false);
-
-// make the builder resizable
-$(".builder").width(prefs.builderWidth).resizable({
-    "handles": "e",
-    "minWidth": 256,
-    "stop": (event: Event, ui: JQueryUI.ResizableUIParams) => {
-        prefs.builderWidth = ui.size["width"];
-    }
-});
 
 // create socket.io client
 let active: boolean = false; // whether the connection is "active" (connecting, connected, error, etc.)
@@ -179,7 +167,7 @@ function send(name: string, data: string) {
 
         // interpolate any referenced variables into the final data
         function interpolate(item: object | string | number | boolean) {
-            if (isArray(item)) { // data is an array, iterate over each item
+            if (Array.isArray(item)) { // data is an array, iterate over each item
                 for (let i = 0; i < item.length; i++) {
                     if (typeof item[i] === "undefined") { // item is undefined already, don't bother trying to parse it
                         continue;
@@ -192,7 +180,7 @@ function send(name: string, data: string) {
                     }
                 }
                 return item;
-            } else if (isObject(item)) { // just a normal object, iterate over each property
+            } else if (item !== null && typeof item === "object") { // just a normal object, iterate over each property
                 for (const key of Object.keys(item)) {
                     if (typeof item[key] === "undefined") { // item is undefined already, don't bother parsing it
                         continue;
@@ -205,7 +193,7 @@ function send(name: string, data: string) {
                     }
                 }
                 return item;
-            } else if (isString(item)) { // just a string, check if it's a temporarily encapsulated interpolator
+            } else if (typeof item === "string") { // string, check if it's a temporarily encapsulated interpolator
                 const match: RegExpMatchArray = item.match(/^\${([a-zA-Z0-9]+)}$/);
                 if (!match) { // doesn't look like an interpolator, skip it
                     return undefined;
@@ -240,23 +228,15 @@ function send(name: string, data: string) {
     Log.info(`Sent event: ${name}\nData: ${displayData}`, LogType.REQUEST);
 }
 
-// connect to server on enter key in url
-$("#url").on("keyup", (e: JQuery.Event) => {
-    if (e.which === 13) { // enter key was pressed
-        const url: string = <string>($("#url").val());
-        connect(url);
-    }
-});
+// set globals for certain connections - these are needed by react until all logic is properly refactored
+// TODO: get rid of these after refactor
+global["active"] = active;
+global["connect"] = connect;
+global["disconnect"] = disconnect;
 
-// connect/disconnect on connect button click
-$("#connect").on("click", () => {
-    if (!active) { // not connected to server, establish connection
-        const url: string = <string>($("#url").val());
-        connect(url);
-    } else { // socket is connected, disconnect
-        disconnect();
-    }
-});
+// instantiate react container
+const reactContainer = document.querySelector("#container");
+ReactDOM.render(React.createElement(Root), reactContainer);
 
 // handle attach button - attach a file to a variable
 $("#attach").on("click", () => {
@@ -278,7 +258,7 @@ ipcRenderer.on(FileAttachEvent.eventName, (electronEvent: Electron.Event, event:
 
 // handle send button
 $("#send").on("click", () => {
-    const name: string = <string>($("#new-event-name").val());
+    const name: string = (global["newEventName"] as TextBox).text;
     const data: string = editor.getValue();
     if (name === "" || !active) {
         return;
@@ -296,7 +276,7 @@ $(document).on("keydown", (e: JQuery.Event) => {
     }
 
     // extract data from ui
-    const name: string = <string>($("#new-event-name").val());
+    const name: string = (global["newEventName"] as TextBox).text;
     const data: string = editor.getValue();
     if (name === "" || !active) { // name is not specified or not connected to a server, don't do anything
         return;
@@ -328,3 +308,28 @@ ipcRenderer.on(UpdateAvailableEvent.eventName, (electronEvent: Electron.Event, e
     }
     $("#update-banner").show();
 });
+
+// connect/disconnect on connect button click
+$("#connect").on("click", () => {
+    if (!active) { // not connected to server, establish connection
+        const url: string = (global["address"] as TextBox).text;
+        connect(url);
+    } else { // socket is connected, disconnect
+        disconnect();
+    }
+});
+
+// make the builder resizable
+$(".builder").width(prefs.builderWidth).resizable({
+    "handles": "e",
+    "minWidth": 256,
+    "stop": (event: Event, ui: JQueryUI.ResizableUIParams) => {
+        prefs.builderWidth = ui.size["width"];
+    }
+});
+
+// load ace editor
+const editor = ace.edit("editor");
+editor.setTheme("ace/theme/socketfox");
+editor.session.setMode("ace/mode/json");
+editor.renderer.setShowGutter(false);

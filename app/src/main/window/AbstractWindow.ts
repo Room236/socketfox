@@ -1,6 +1,7 @@
-import {BrowserWindow, ipcMain} from "electron";
-import {loadAsset} from "../../assets";
+import { BrowserWindow, ipcMain } from "electron";
+import { loadAsset } from "../../assets";
 import { AbstractEvent } from "../../common/event/AbstractEvent";
+import {implementsIpcMainInvokeEvent} from "../../types";
 
 type HandlerMap = {
     [key: string]: HandlerInfo;
@@ -42,6 +43,9 @@ export abstract class AbstractWindow {
             "icon": loadAsset("icons/64x64.png"),
             resizable,
             "show": false,
+            "webPreferences": {
+                "nodeIntegration": true
+            },
             width
         });
 
@@ -156,6 +160,9 @@ export abstract class AbstractWindow {
      * Handle an IPC message from any window - only fire the registered handler if this window was the sender
      */
     private onIpcMessage(channel: string, event: Electron.Event, payload: AbstractEvent): void {
+        if (!implementsIpcMainInvokeEvent(event)) {
+            return;
+        }
         if (event.sender === this.window.webContents) { // this window was the sender, fire the handler
             for (const handler of this.ipcHandlers[channel].registeredHandlers) {
                 handler(payload);

@@ -5,39 +5,14 @@
     <title>Socketfox</title>
     <link rel="stylesheet" href="../fonts/font-awesome/css/all.css">
     <link rel="stylesheet" href="../fonts/fira-code/fira_code.css" type="text/css">
-    <link rel="stylesheet" href="../scss/styles.css" type="text/css">
-    <script src="../../../node_modules/ace-builds/src/ace.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+    <script>
+        const exports = {}; // hack to get exports to work
+    </script>
+    <script src="../../../node_modules/ace-builds/src/ace.js"></script>
 </head>
 <body>
-    <div id="update-banner" class="banner" style="display:none">
-        <i class="fa fa-asterisk"></i>
-        <p class="banner__text">
-            A new update is available.
-            <span id="update-banner__install-prompt">You can install it now or it can be installed when you quit.</span>
-        </p>
-        <button id="restart" class="button button--inverse" title="Restart"><i class="fa fa-undo"></i></button>
-    </div>
-    <div class="nav">
-        <input type="text" id="url" class="text-box" placeholder="Enter server address..." />
-        <button id="connect" class="button" title="Connect"><i class="fas fa-plug"></i></button>
-        <button id="clear__button" class="button" title="Clear history"><i class="fas fa-trash-alt"></i></button>
-    </div>
-    <main class="row">
-        <div class="builder">
-            <p class="panel__title">Event builder</p>
-            <input type="text" id="new-event-name" class="text-box" placeholder="Event name" />
-            <div id="editor"></div>
-            <div class="editor-buttons">
-                <button id="attach" class="button" title="Attach"><i class="fas fa-paperclip"></i></button>
-                <button id="send" class="button" title="Send"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-        <div class="log">
-            <div class="log__empty-message">No events</div>
-        </div>
-    </main>
-    <script type="text/javascript">
-        require("../../dist/renderer/renderer");
-    </script>
+    <div id="container"></div>
+    <script src="../../src/renderer/renderer.js"></script>
 </body>
 </html>

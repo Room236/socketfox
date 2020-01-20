@@ -1,8 +1,8 @@
-import {app, Menu, MenuItemConstructorOptions} from "electron";
+import { app, Menu, MenuItem, MenuItemConstructorOptions} from "electron";
 import * as isDev from "electron-is-dev";
-import { autoUpdater} from "electron-updater";
+import { autoUpdater } from "electron-updater";
 import { AboutWindow } from "./window/AboutWindow";
-import {AbstractWindow} from "./window/AbstractWindow";
+import { AbstractWindow } from "./window/AbstractWindow";
 import { ConnectionWindow } from "./window/ConnectionWindow";
 
 const isDarwin: boolean = process.platform === "darwin"; // darwin is the macos kernel
@@ -96,7 +96,7 @@ function init() {
             "label": "Developer",
             "submenu": [
                 { "role": "reload" },
-                { "role": "toggledevtools" }
+                { "role": "toggleDevTools" }
             ]
         });
     }
